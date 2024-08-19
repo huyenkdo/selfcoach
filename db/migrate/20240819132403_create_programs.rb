@@ -4,7 +4,7 @@ class CreatePrograms < ActiveRecord::Migration[7.1]
       t.float :objective_km
       t.float :objective_time
       t.date :race_date
-      t.string :free_days, array: true
+      t.integer :free_days, array: true
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_132958) do
     t.float "objective_km"
     t.float "objective_time"
     t.date "race_date"
-    t.string "free_days", array: true
+    t.integer "free_days", array: true
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
