@@ -14,7 +14,7 @@ Run.delete_all
 Program.delete_all
 User.delete_all
 
-User.create(
+user = User.create(
   email: "exemple1@email.com",
   password: "12345",
   first_name: "Paul",
@@ -27,5 +27,13 @@ Program.create(
   objective_km: 42.195,
   objective_time: 195,
   race_date: Date.new(2025, 4, 13),
-  free_days:
+  free_days: [0, 2, 3, 5],
+  user_id: user.id
+)
+
+Runs.create(
+  run_interval_km: 10,
+  run_interval_time: 0,
+  run_interval_pace: 14.5
+
 )

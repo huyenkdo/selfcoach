@@ -10,6 +10,7 @@ class CreateRuns < ActiveRecord::Migration[7.1]
       t.string :hr_zone
       t.integer :difficulty
       t.string :kind
+      t.integer :run_interval_nbr
 
       t.timestamps
     end
