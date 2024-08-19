@@ -14,26 +14,75 @@ Run.delete_all
 Program.delete_all
 User.delete_all
 
-user = User.create(
+user = User.create!(
   email: "exemple1@email.com",
-  password: "12345",
+  password: "12345678",
   first_name: "Paul",
   weight: 80,
   age: 25,
   vma: 12
 )
 
-Program.create(
+puts "#{User.count} user created ! "
+
+program = Program.create!(
   objective_km: 42.195,
   objective_time: 195,
-  race_date: Date.new(2025, 4, 13),
+  race_date: Date.new(2024, 11, 13),
   free_days: [0, 2, 3, 5],
   user_id: user.id
 )
 
-Runs.create(
-  run_interval_km: 10,
-  run_interval_time: 0,
-  run_interval_pace: 14.5
+puts "#{Program.count} program created ! "
 
+run1 = Run.create!(
+  run_interval_km: 10,
+  run_interval_pace: 11,
+  hr_zone: "Zone 2",
+  difficulty: 2,
+  kind: "easy run"
 )
+
+run2 = Run.create!(
+  run_interval_km: 23,
+  run_interval_pace: 10,
+  hr_zone: "Zone 3",
+  difficulty: 3,
+  kind: "long run"
+)
+
+run3 = Run.create!(
+  run_interval_time: 2,
+  run_interval_pace: 14,
+  rest_interval_pace: 0,
+  rest_interval_time: 1,
+  hr_zone: "Zone 5",
+  difficulty: 5,
+  kind: "interval run",
+  run_interval_nbr: 10
+)
+
+puts "#{Run.count} runs created ! "
+
+Session.create!(
+  run_id: run1.id,
+  date: Date.new(2024, 9, 7),
+  program_id: program.id,
+  status: "Uncompleted"
+)
+
+Session.create!(
+  run_id: run2.id,
+  date: Date.new(2024, 9, 9),
+  program_id: program.id,
+  status: "Uncompleted"
+)
+
+Session.create!(
+  run_id: run3.id,
+  date: Date.new(2024, 9, 12),
+  program_id: program.id,
+  status: "Uncompleted"
+)
+
+puts "#{Session.count} session created ! "
