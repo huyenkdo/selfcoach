@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :welcome ]
-
   def home
-  end
+    @run = Run.new
 
-  def welcome
-
+    unless @run
+      flash[:alert] = "Aucun run trouvé."
+      redirect_to some_other_path
+    end
   end
 end
