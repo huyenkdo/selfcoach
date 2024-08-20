@@ -1,2 +1,25 @@
-<h1>Programs#new</h1>
-<p>Find me in app/views/programs/new.html.erb</p>
+<div id="profile-form" class="px-5 d-flex justify-content-center" style="height: 100vh" >
+    <div class="flex-fill">
+      <h1 class="fw-bold text-primary my-5 text-center" style="font-size: xx-large">Objectifs</h1>
+      <%= simple_form_for(@program, url: 'programs', method: 'post') do |f| %>
+        <h2 class="fw-bold text-info mb-3 fs-4">Ton objectif de course ?</h2>
+          <div class="d-flex justify-content-between mb-4">
+            <%= f.input :objective_km, as: :select, collection: [5, 10, 21.1, 42.195], label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white" }, wrapper_html: { class: 'flex-grow-1' } %>
+            <span class="input-group-text align-self-baseline" id="basic-addon2" style="border: none; background: none;">km</span>
+          </div>
+        <h2 class="fw-bold text-info mb-3 fs-4">Date de ta course ?</h2>
+        <%= f.input :race_date, label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white mb-4" } %>
+        <h2 class="fw-bold text-info mb-3 fs-4">Ton objectif de chrono ?</h2>
+        <div class="d-flex mb-4">
+          <%= f.input :objective_time, label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white" } %>
+          <span class="input-group-text align-self-baseline" id="basic-addon2" style="border: none; background: none;">h</span>
+          <%= f.input :objective_time, label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white" } %>
+          <span class="input-group-text align-self-baseline" id="basic-addon2" style="border: none; background: none;">mins</span>
+        </div>
+        <h2 class="fw-bold text-info mb-3 fs-4">Tes dispos ?</h2>
+        <%= f.collection_check_boxes :free_days, [[0, 'Lundi'], [1, 'Mardi'], [2, 'Mardi'], [1, 'Mardi'], [1, 'Mardi'], [1, 'Mardi'], [1, 'Mardi']], :first, :last %>
+        <%= f.input :free_days, label: false, as: :check_boxes %>
+        <%= f.submit ">", data: { toggle_target: "togglableButton4" }, class: "btn btn-info rounded-pill mt-4 d-none", style: "width: 75px" %>
+      <% end %>
+    </div>
+</div>

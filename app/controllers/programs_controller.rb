@@ -14,4 +14,6 @@ class ProgramsController < ApplicationController
 
   def recap
   end
+
+  # params.requrie().permit(free_days: [])
 end
