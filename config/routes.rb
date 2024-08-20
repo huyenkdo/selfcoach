@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   root to: "pages#welcome"
-  resources :users, only: [:new, :create]
+  resource :profile, only: [:show, :update]
+
   resources :programs, only: [:new, :create, :edit, :update] do
     member do
       get :recap
-      resources :sessions, only: [:index, :edit, :update]
+      resources :running_sessions, only: [:index, :edit, :update]
     end
   end
-  get "/home", to: "pages#home", as: "home"
 
+  get "/home", to: "pages#home", as: "home"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

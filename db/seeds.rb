@@ -9,7 +9,7 @@
 #   end
 require 'date'
 
-Session.delete_all
+RunningSession.delete_all
 Run.delete_all
 Program.delete_all
 User.delete_all
@@ -64,25 +64,25 @@ run3 = Run.create!(
 
 puts "#{Run.count} runs created ! "
 
-Session.create!(
+RunningSession.create!(
   run_id: run1.id,
   date: Date.new(2024, 9, 7),
   program_id: program.id,
   status: "Uncompleted"
 )
 
-Session.create!(
+RunningSession.create!(
   run_id: run2.id,
   date: Date.new(2024, 9, 9),
   program_id: program.id,
   status: "Uncompleted"
 )
 
-Session.create!(
+RunningSession.create!(
   run_id: run3.id,
   date: Date.new(2024, 9, 12),
   program_id: program.id,
   status: "Uncompleted"
 )
 
-puts "#{Session.count} session created ! "
+puts "#{RunningSession.count} running sessions created ! "
