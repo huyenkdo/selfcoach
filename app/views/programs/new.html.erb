@@ -1,4 +1,4 @@
-<div id="profile-form" class="px-5 d-flex justify-content-center" style="height: 100vh" >
+<div id="profile-form" class="px-5 d-flex justify-content-center" >
     <div class="flex-fill">
       <h1 class="fw-bold text-primary my-5 text-center" style="font-size: xx-large">Objectifs</h1>
       <%= simple_form_for(@program, url: 'programs', method: 'post') do |f| %>
@@ -17,9 +17,12 @@
           <span class="input-group-text align-self-baseline" id="basic-addon2" style="border: none; background: none;">mins</span>
         </div>
         <h2 class="fw-bold text-info mb-3 fs-4">Tes dispos ?</h2>
-        <%= f.collection_check_boxes :free_days, [[0, 'Lundi'], [1, 'Mardi'], [2, 'Mardi'], [1, 'Mardi'], [1, 'Mardi'], [1, 'Mardi'], [1, 'Mardi']], :first, :last %>
-        <%= f.input :free_days, label: false, as: :check_boxes %>
-        <%= f.submit ">", data: { toggle_target: "togglableButton4" }, class: "btn btn-info rounded-pill mt-4 d-none", style: "width: 75px" %>
+        <div class="d-flex flex-column align-items-center">
+          <%= f.collection_check_boxes :free_days, weekdays, :first, :last, {item_wrapper_class: 'mb-2 px-3 py-2 rounded-3 w-75 checkbox-wrapper-13'}, class: "me-2"%>
+        </div>
+        <div class="d-flex justify-content-center">
+          <%= f.submit ">", class: "btn btn-info rounded-pill mt-4 mb-5", style: "width: 75px" %>
+        </div>
       <% end %>
     </div>
 </div>
