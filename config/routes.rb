@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#welcome"
   resource :profile, only: [:show, :update]
 
-  resources :programs, only: [:new, :create, :edit, :update] do
+  resources :programs, only: [:show, :new, :create, :edit, :update] do
     member do
       get :recap
       resources :running_sessions, only: [:index, :edit, :update]
