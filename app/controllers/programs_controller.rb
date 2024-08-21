@@ -11,6 +11,7 @@ class ProgramsController < ApplicationController
   end
 
   def create
+    raise
   end
 
   def edit
