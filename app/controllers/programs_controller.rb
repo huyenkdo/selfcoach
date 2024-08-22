@@ -96,9 +96,25 @@ class ProgramsController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
+    @user = current_user
+    @program = Program.find(params[:id])
+
+    if user_params_present?
+       @user.update(user_params)
+        redirect_to recap_program_path, notice: 'Profil mis à jour avec succès.'
+    elsif program_params_present?
+       @program.update(program_params)
+        redirect_to recap_program_path, notice: 'Objectif mis à jour avec succès.'
+      else
+        render :edit
+      end
+    # else
+    #   redirect_to recap_program_path, alert: 'Aucune donnée à mettre à jour.'
+
   end
 
   def recap
@@ -115,5 +131,17 @@ class ProgramsController < ApplicationController
 
   def program_params
     params.require(:program).permit(:objective_km, :race_date, :objective_time_hours, :objective_time_mins, free_days: [])
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :age, :weight, :vma)
+  end
+
+  def user_params_present?
+    params[:user].present? && user_params.values.any?(&:present?)
+  end
+
+  def program_params_present?
+    params[:program].present? && program_params.values.any?(&:present?)
   end
 end
