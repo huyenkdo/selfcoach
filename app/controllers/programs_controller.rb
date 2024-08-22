@@ -26,7 +26,8 @@ class ProgramsController < ApplicationController
     program.objective_time = objective_time
 
     # add reccurences
-    schedule.add_recurrence_rule IceCube::Rule.weekly.day(1, 2)
+    schedule = IceCube::Schedule.new
+    reccurences = schedule.add_recurrence_rule IceCube::Rule.weekly.day(free_days)
 
     raise
     if program.save
