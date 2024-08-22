@@ -93,8 +93,9 @@ class ProgramsController < ApplicationController
         easy_run = Run.create!(
           kind: 'Easy',
           run_interval_km: distance = rand(2..5),
-          run_interval_time: (distance / easy_pace) * 60,
+          run_interval_time: ((distance / easy_pace) * 60).round(2),
           run_interval_pace: easy_pace,
+          run_interval_nbr: 1,
           difficulty: 1,
           hr_zone: 'Zone 2'
         )
@@ -110,8 +111,9 @@ class ProgramsController < ApplicationController
         long_run = Run.create!(
           kind: 'Long',
           run_interval_km: long_run_distance,
-          run_interval_time: (long_run_distance / easy_pace) * 60,
+          run_interval_time: ((long_run_distance / easy_pace) * 60).round(2),
           run_interval_pace: easy_pace,
+          run_interval_nbr: 1,
           difficulty:
             if long_run_distance > program_params[:objective_km].to_f * 0.7
               3
@@ -131,10 +133,10 @@ class ProgramsController < ApplicationController
         interval_run = Run.create!(
           kind: 'Interval',
           run_interval_time: run_time = rand(1..3),
-          run_interval_km: (run_time / 60) * interval_pace,
+          run_interval_km: ((run_time / 60) * interval_pace).round(2),
           run_interval_pace: interval_pace,
           rest_interval_time: rest_time = 1,
-          rest_interval_km: (rest_time / 60) * interval_pace,
+          rest_interval_km: ((rest_time / 60) * interval_pace).round(2),
           rest_interval_pace: easy_pace,
           run_interval_nbr: rand(7..10),
           difficulty: 5,
@@ -152,8 +154,9 @@ class ProgramsController < ApplicationController
         tempo_run = Run.create!(
           kind: 'Tempo',
           run_interval_km: tempo_run_distance,
-          run_interval_time: (tempo_run_distance / tempo_pace) * 60,
+          run_interval_time: ((tempo_run_distance / tempo_pace) * 60).round(2),
           run_interval_pace: tempo_pace,
+          run_interval_nbr: 1,
           difficulty: 4,
           hr_zone: 'Zone 3'
         )
@@ -162,8 +165,8 @@ class ProgramsController < ApplicationController
           run_id: tempo_run.id,
           date: recurrence
         )
-        redirect_to recap_program_path(program)
       end
+      redirect_to recap_program_path(program)
     else
       render :new, status: :unprocessable_entity
     end
