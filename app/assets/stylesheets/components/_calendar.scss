@@ -1,71 +1,13 @@
-.calendar {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
+.week {
+  min-width: 1600px;
+  overflow-x: scroll;
 }
 
-.week-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-}
-
-.week-row span {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  padding-right: 10px;
-  font-weight: bold;
-}
-
-.day-card {
-  background-color: #ffe5d1;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 5px;
-  padding: 10px;
-  text-align: center;
-  width: 100px;
-  border: 2px solid transparent;
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &.highlighted {
-    border-color: purple;
-  }
-
-  .day-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-
-    .day-name {
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-
-    .day-number {
-      font-size: 1.2em;
-    }
-  }
-
-  .session-details {
-    background-color: #ffad84;
-    border-radius: 4px;
-    padding: 5px;
-
-    .session-duration {
-      font-size: 0.9em;
-      color: #6b6b6b;
-    }
-
-    .session-type {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-  }
+.day {
+  background-color: #F4B393 !important;
+  padding: 15px !important;
+  border-radius: 5px !important;
+  text-align: center !important;
+  width: 120px !important;
+  height: 100px !important;
 }
