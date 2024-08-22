@@ -25,17 +25,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_141821) do
     t.index ["user_id"], name: "index_programs_on_user_id"
   end
 
-  create_table "running_sessions", force: :cascade do |t|
-    t.bigint "run_id", null: false
-    t.date "date"
-    t.bigint "program_id", null: false
-    t.string "status", default: "uncompleted"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["program_id"], name: "index_running_sessions_on_program_id"
-    t.index ["run_id"], name: "index_running_sessions_on_run_id"
-  end
-
   create_table "runs", force: :cascade do |t|
     t.float "run_interval_km"
     t.float "run_interval_time"
@@ -50,6 +39,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_141821) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "run_id", null: false
+    t.date "date"
+    t.bigint "program_id", null: false
+    t.string "status", default: "uncompleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["program_id"], name: "index_sessions_on_program_id"
+    t.index ["run_id"], name: "index_sessions_on_run_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,6 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_141821) do
   end
 
   add_foreign_key "programs", "users"
-  add_foreign_key "running_sessions", "programs"
-  add_foreign_key "running_sessions", "runs"
+  add_foreign_key "sessions", "programs"
+  add_foreign_key "sessions", "runs"
 end

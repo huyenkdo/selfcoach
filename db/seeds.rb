@@ -86,3 +86,4 @@ RunningSession.create!(
 )
 
 puts "#{RunningSession.count} running sessions created ! "
+
