@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def show
+  def recap
     @user = current_user
   end
 end

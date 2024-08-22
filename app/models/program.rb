@@ -2,6 +2,7 @@ class Program < ApplicationRecord
   attr_accessor :objective_time_hours, :objective_time_mins
 
   belongs_to :user
+  has_many :running_sessions, dependent: :destroy
 
   validates :objective_km, presence: true
   validates :race_date, presence: true

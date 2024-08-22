@@ -7,4 +7,5 @@ class RunningSessionsController < ApplicationController
 
   def update
   end
+
 end

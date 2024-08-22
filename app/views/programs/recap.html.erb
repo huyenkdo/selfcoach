@@ -1,4 +1,5 @@
-<div class="container mt-5">
+<!-- Mon Profil Section -->
+<div class="container mt-5 recap_container">
   <div class="row">
     <div class="col-12">
       <h1 class="text-danger">Recap</h1>
@@ -8,53 +9,52 @@
   <!-- Mon Profil Section -->
   <div class="row mt-4">
     <div class="col-12">
-      <h3 class="text-primary">Mon profil</h3>
-      <div class="p-3 bg-light rounded">
-        <p><strong>Nom :</strong> <%= @user.last_name %></p>
-        <p><strong>Prénom :</strong> <%= @user.first_name %></p>
-        <p><strong>Âge :</strong> <%= @user.age %></p>
-        <p><strong>Taille :</strong> <%= @user.height %> cm</p>
-        <p><strong>Poids :</strong> <%= @user.weight %> kg</p>
-        <p><strong>VMA :</strong> <%= @user.vma %> km/h</p>
+        <h3 class="text-primary">Mon profil</h3>
+        <div class="p-3 bg-light rounded text-dark">
+          <p><strong>Prénom :</strong> <%= @user.first_name %></p>
+          <p><strong>Âge :</strong> <%= @user.age %></p>
+          <p><strong>Poids :</strong> <%= @user.weight %> kg</p>
+          <p><strong>VMA :</strong> <%= @user.vma %> km/h</p>
+        </div>
       </div>
     </div>
-  </div>
+
 
   <!-- Mon Objectif Section -->
   <div class="row mt-4">
     <div class="col-12">
       <h3 class="text-primary">Mon objectif</h3>
-      <div class="p-3 bg-light rounded">
+      <div class="p-3 bg-light rounded text-dark">
         <p><strong>Type de course :</strong> Marathon</p>
-        <p><strong>Date :</strong> <%= @user.program.race_date.strftime("%d/%m/%Y") %></p>
-        <p><strong>Objectif :</strong> <%= @user.program.objective_time %> min</p>
+  <p><strong>Date :</strong> <%= @program.race_date.strftime("%d/%m/%Y") %></p>
+  <p><strong>Objectif :</strong> <%= @program.objective_time %> min</p>
       </div>
     </div>
   </div>
 
-  <!-- Ma Semaine Type Section -->
+ <!-- Ma Semaine Type Section -->
   <div class="row mt-4">
     <div class="col-12">
       <h3 class="text-primary">Ma semaine type</h3>
 
-      <% @user.program.sessions.each do |session| %>
+      <% @sessions.each do |session| %>
         <div class="card mt-3">
           <div class="card-body">
             <h5 class="card-title">
               <%= session.date.strftime("%A") %>
               <span class="float-right">
                 <% if session.run.run_interval_time %>
-                  <%= session.run.run_interval_time * session.run.run_interval_nbr %>min
+                  <%= session.run.run_interval_time * session.run.run_interval_nbr %> min
                 <% else %>
-                  <%= session.run.run_interval_km %>km
+                  <%= session.run.run_interval_km %> km
                 <% end %>
               </span>
             </h5>
             <p><strong>Type :</strong> <%= session.run.kind %></p>
             <% if session.run.run_interval_time && session.run.rest_interval_time %>
-              <p><strong>Interval Training:</strong> <%= session.run.run_interval_nbr %> x <%= session.run.run_interval_time %>min at <%= session.run.run_interval_pace %> km/h with <%= session.run.rest_interval_time %>min rest</p>
+              <p><strong>Interval Training:</strong> <%= session.run.run_interval_nbr %> x <%= session.run.run_interval_time %> min at <%= session.run.run_interval_pace %> km/h with <%= session.run.rest_interval_time %> min rest</p>
             <% else %>
-              <p><strong>Échauffement :</strong> <%= session.run.run_interval_km %>km at <%= session.run.run_interval_pace %> km/h</p>
+              <p><strong>Échauffement :</strong> <%= session.run.run_interval_km %> km at <%= session.run.run_interval_pace %> km/h</p>
             <% end %>
             <p><strong>Difficulté :</strong>
               <% session.run.difficulty.times do %>
@@ -67,8 +67,6 @@
           </div>
         </div>
       <% end %>
-
     </div>
   </div>
 </div>
-
