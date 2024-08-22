@@ -112,8 +112,6 @@ class ProgramsController < ApplicationController
       else
         render :edit
       end
-    # else
-    #   redirect_to recap_program_path, alert: 'Aucune donnée à mettre à jour.'
 
   end
 
