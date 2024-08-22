@@ -1,7 +1,7 @@
 class Run < ApplicationRecord
   has_many :sessions
 
-  validates :date, presence: true
+  # validates :date, presence: true
   # validates :run_interval_km, presence: true
   # validates :run_interval_time, presence: true
   # validates :run_interval_pace, presence: true
