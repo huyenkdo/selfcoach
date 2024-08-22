@@ -130,7 +130,7 @@ class ProgramsController < ApplicationController
   end
 
   def program_params
-    params.require(:program).permit(:objective_km, :race_date, :objective_time_hours, :objective_time_mins, free_days: [])
+    params.require(:program).permit(:objective_km, :race_date, :objective_time, :objective_time_hours, :objective_time_mins, free_days: [])
   end
 
   def user_params
