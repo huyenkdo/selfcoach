@@ -4,29 +4,49 @@
 </div>
 
 <div class="day-run-container">
-  <div class="info-item container-fluid d-flex align-items-center justify-content-between">
-    <p> <%= @run.date %> </p>
-    <p> <%= @run.total_time %> min </p>
+    <div class="info-item container-fluid d-flex align-items-center justify-content-between">
+      <p> <%= @run.date %> </p>
+      <p> <%= @run.total_time %> min </p>
+    </div>
+  <div class="info-item">
+      <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
+        <p>Hello</p>
+        <p>Hello</p>
+        <p>Hello</p>
+      </div>
+      <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
+        <p>Hello</p>
+        <p>Hello</p>
+        <p>Hello</p>
+      </div>
+      <div class="info-item-note">
+        <p>  Difficulté </p>
+      </div>
   </div>
-<div class="info-item">
-    <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
-      <p>Hello</p>
-      <p>Hello</p>
-      <p>Hello</p>
-    </div>
-    <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
-      <p>Hello</p>
-      <p>Hello</p>
-      <p>Hello</p>
-    </div>
-    <div class="info-item-note">
-      <p>  Difficulté </p>
-    </div>
 </div>
 
-<div class="run-week">
-  </div>
+<div class="run-week container-fluid d-flex justify-content-center">
+  <%= link_to do %>
+      <button class="week-program-btn"> Programme de la semaine ></button>
+    <% end %>
+</div>
 
-  <div class="data-home-page">
-  </div>
+<div class="data-home-page container-fluid d-flex justify-content-center ">
+  <%= link_to do %>
+      <button class="data-program-btn"> statistiques et données d'entrainement </button>
+    <% end %>
+</div>
+
+<div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
+  <%= link_to do %>
+      <button class="calendar-btn"></button>
+    <% end %>
+
+  <%= link_to do %>
+    <button class="go-btn"> Go </button>
+  <% end %>
+
+  <%= link_to do %>
+    <button class="profil-btn"></button>
+  <% end %>
 </div>
