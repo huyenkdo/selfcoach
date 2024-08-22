@@ -66,6 +66,27 @@ puts "#{Run.count} runs created ! "
 
 RunningSession.create!(
   run_id: run1.id,
+  date: Date.new(2024, 8, 23),
+  program_id: program.id,
+  status: "Uncompleted"
+)
+
+RunningSession.create!(
+  run_id: run2.id,
+  date: Date.new(2024, 8, 25),
+  program_id: program.id,
+  status: "Uncompleted"
+)
+
+RunningSession.create!(
+  run_id: run3.id,
+  date: Date.new(2024, 8, 20),
+  program_id: program.id,
+  status: "Uncompleted"
+)
+
+RunningSession.create!(
+  run_id: run1.id,
   date: Date.new(2024, 9, 7),
   program_id: program.id,
   status: "Uncompleted"

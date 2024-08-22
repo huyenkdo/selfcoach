@@ -7,4 +7,8 @@ class PagesController < ApplicationController
       redirect_to some_other_path
     end
   end
+
+  def recap
+    @user = current_user
+  end
 end
