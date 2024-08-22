@@ -1,0 +1,46 @@
+.nav-bar-home-page {
+  background-color: #F7C59F;
+  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  position: relative; /* Ajoutez ceci pour permettre le positionnement absolu du bouton "Go" */
+}
+
+.calendar-btn {
+  background-image: url('./calendar-font.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  color: #004E89;
+}
+
+.go-btn {
+  background-color: #FF6B35;
+  border: none;
+  color: white;
+  font-size: x-large;
+  font-weight: 500;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.profil-btn {
+  background-image: url('./profil-font.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  color: #004E89;
+}

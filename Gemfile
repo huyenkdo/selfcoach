@@ -52,6 +52,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "simple_calendar"
 gem 'ice_cube', '~> 0.17.0'
+gem 'activesupport', '~> 7.1.3.4'
 
 group :development, :test do
   gem "dotenv-rails"
