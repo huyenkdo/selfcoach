@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :programs
 
-  validates :first_name, presence: true
-  validates :weight, presence: true
-  validates :age, presence: true
+  validates :first_name, presence: true, on: :update
+  validates :weight, presence: true, on: :update
+  validates :age, presence: true, on: :update
 end

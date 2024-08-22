@@ -1,4 +1,6 @@
 class Program < ApplicationRecord
+  attr_accessor :objective_time_hours, :objective_time_mins
+
   belongs_to :user
 
   validates :objective_km, presence: true

@@ -1,6 +1,6 @@
-class CreateSessions < ActiveRecord::Migration[7.1]
+class CreateRunningSessions < ActiveRecord::Migration[7.1]
   def change
-    create_table :sessions do |t|
+    create_table :running_sessions do |t|
       t.references :run, null: false, foreign_key: true
       t.date :date
       t.references :program, null: false, foreign_key: true

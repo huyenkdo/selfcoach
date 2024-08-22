@@ -1,0 +1,18 @@
+<div id="profile-form" class="align-items-center d-flex justify-content-center text-center" style="height: 100vh" data-controller="toggle" >
+  <div class="mx-5">
+    <h1 class="fw-bold text-primary mb-4" style="font-size: xx-large" data-toggle-target="togglableQuestion1">Ton prénom ?</h1>
+    <h1 class="fw-bold text-primary mb-4 d-none" style="font-size: xx-large" data-toggle-target="togglableQuestion2">Ton age ?</h1>
+    <h1 class="fw-bold text-primary mb-4 d-none" style="font-size: xx-large" data-toggle-target="togglableQuestion3">Ton poids ?</h1>
+    <h1 class="fw-bold text-primary mb-4 d-none" style="font-size: xx-large" data-toggle-target="togglableQuestion4">Ton VMA ?</h1>
+    <%= simple_form_for(@user, url: 'profile', method: 'patch') do |f| %>
+      <%= f.input :first_name, label: false, input_html: { data: { toggle_target: "togglableInput1" } } %>
+      <%= f.input :age, label: false, input_html: { data: { toggle_target: "togglableInput2" }, class: "d-none" } %>
+      <%= f.input :weight, label: false, input_html: { data: { toggle_target: "togglableInput3" }, class: "d-none" } %>
+      <%= f.input :vma, label: false, input_html: { data: { toggle_target: "togglableInput4" }, class: "d-none" } %>
+      <%= f.submit ">", data: { toggle_target: "togglableButton4" }, class: "btn btn-info rounded-pill mt-4 d-none", style: "width: 75px" %>
+    <% end %>
+    <button class="btn btn-info rounded-pill mt-4" style="width: 75px" data-action="click->toggle#fireQuestion2" data-toggle-target="togglableButton1">&gt;</button>
+    <button class="btn btn-info rounded-pill mt-4 d-none" style="width: 75px" data-action="click->toggle#fireQuestion3" data-toggle-target="togglableButton2">&gt;</button>
+    <button class="btn btn-info rounded-pill mt-4 d-none" style="width: 75px" data-action="click->toggle#fireQuestion4" data-toggle-target="togglableButton3">&gt;</button>
+  </div>
+</div>

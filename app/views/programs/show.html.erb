@@ -1,0 +1,20 @@
+<h1>Calendrier</h1>
+
+
+<%= week_calendar(start_date: Date.today) do |date| %>
+  <%= date %>
+<% end %>
+
+<%= week_calendar(start_date: Date.today + 7.days) do |date| %>
+  <%= date %>
+<% end %>
+
+<%= week_calendar(start_date: Date.today + 14.days) do |date| %>
+  <%= date %>
+<% end %>
+
+<%= calendar(start_date_param: :my_date) do |date| %>
+  <%= date %>
+<% end %>
+
+<%= @running_sessions.to_a %>

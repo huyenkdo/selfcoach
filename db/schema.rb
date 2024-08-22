@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_19_132958) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_20_141821) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_132958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_programs_on_user_id"
+  end
+
+  create_table "running_sessions", force: :cascade do |t|
+    t.bigint "run_id", null: false
+    t.date "date"
+    t.bigint "program_id", null: false
+    t.string "status", default: "uncompleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["program_id"], name: "index_running_sessions_on_program_id"
+    t.index ["run_id"], name: "index_running_sessions_on_run_id"
   end
 
   create_table "runs", force: :cascade do |t|
@@ -38,17 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_132958) do
     t.integer "run_interval_nbr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.bigint "run_id", null: false
     t.date "date"
-    t.bigint "program_id", null: false
-    t.string "status", default: "uncompleted"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["program_id"], name: "index_sessions_on_program_id"
-    t.index ["run_id"], name: "index_sessions_on_run_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_132958) do
   end
 
   add_foreign_key "programs", "users"
-  add_foreign_key "sessions", "programs"
-  add_foreign_key "sessions", "runs"
+  add_foreign_key "running_sessions", "programs"
+  add_foreign_key "running_sessions", "runs"
 end

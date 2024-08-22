@@ -1,4 +1,4 @@
-class Session < ApplicationRecord
+class RunningSession < ApplicationRecord
   belongs_to :run
   belongs_to :program
 
