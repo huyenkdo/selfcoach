@@ -1,2 +1,32 @@
 <h1>Sessions#edit</h1>
 <p>Find me in app/views/sessions/edit.html.erb</p>
+
+<!-- Edit Training Form Container -->
+<div class="container mt-5" style="max-width: 400px; background-color: #fffdd0; padding: 20px; border-radius: 10px;">
+
+  <!-- Page Title -->
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2 style="color: #ff5a00; font-weight: bold;">Paramètres</h2>
+    </div>
+  </div>
+
+   <%= form_with(model: @running_session, url: running_session_path(@running_session), method: :patch, local: true) do |f| %>
+          <%# <div class="mb-3">
+            <%= f.label :race_date, "Date de la course", style: "color: black;" %>
+            <%# <%= f.date_field :race_date, class: "form-control", style: "color: black;" %> %>
+          <%# </div> %> %>
+          <div class="mb-3">
+            <%= f.label :objective_time, "Objectif (min)", style: "color: black;" %>
+            <%= f.number_field :objective_time, class: "form-control", style: "color: black;" %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :kind, "Type d'entrainement", style: "color: black;" %>
+            <%= f.checkbox :kind, class: "form-check-input", style: "color: black;" %>
+          </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+
+        <% end %>
+
+</div>

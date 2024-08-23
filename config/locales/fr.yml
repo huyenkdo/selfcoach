@@ -1,0 +1,11 @@
+fr:
+  hello: "Bonjour"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+    day_names: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"]
+    abbr_day_names: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"]
+    month_names: [~, "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+    abbr_month_names: [~, "jan", "fév", "mar", "avr", "mai", "jun", "jul", "aoû", "sep", "oct", "nov", "déc"]
