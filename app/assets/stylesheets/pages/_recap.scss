@@ -2,6 +2,7 @@ body {
   background-image: url('./background-photo.jpg');
   background-size: cover;
   background-position: center;
+
   background-attachment: fixed;
   color: white;
   /* Ajustez la couleur du texte pour être lisible */
@@ -41,3 +42,9 @@ p.mt-2 {
 .text-muted {
   color: #ccc !important; /* Ajuste la couleur des étoiles non sélectionnées */
 }
+
+// .text-primary {
+//   color: #251672;
+//   font-weight: bold;
+//   font-style: italic;
+// }

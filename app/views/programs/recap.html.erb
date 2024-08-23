@@ -1,15 +1,15 @@
 <!-- Mon Profil Section -->
-<div class="container mt-5 recap_container">
+<div class="container mt-5 my-5 p-4 mrecap_container" >
   <div class="row">
     <div class="col-12 d-flex justify-content-between align-items-center">
-      <h3 class="text-primary">Mon profil</h3>
+      <h3 class="text-info" style="font-style: italic;">Mon profil</h3>
       <!-- Bouton d'édition pour Mon profil -->
-      <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-        <i class="fa-regular fa-pen-to-square"></i>
+      <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="border-color: #ff5a00;">
+        <i class="fa-regular fa-pen-to-square" style="color: #ff5a00;"></i>
       </button>
     </div>
     <div class="col-12">
-      <div class="p-3 bg-light rounded text-dark">
+      <div class="p-3" style="background-color: #fffdd0; color: #333; border-radius: 5px;">
         <p><strong>Prénom :</strong> <%= @user.first_name %></p>
         <p><strong>Âge :</strong> <%= @user.age %></p>
         <p><strong>Poids :</strong> <%= @user.weight %> kg</p>
@@ -21,59 +21,71 @@
   <!-- Mon Objectif Section -->
   <div class="row mt-4">
     <div class="col-12 d-flex justify-content-between align-items-center">
-      <h3 class="text-primary">Mon objectif</h3>
+      <h3 class="text-info" style="font-style: italic;">Mon objectif</h3>
       <!-- Bouton d'édition pour Mon objectif -->
-      <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editObjectiveModal">
-        <i class="fa-regular fa-pen-to-square"></i>
+      <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editObjectiveModal" style="border-color: #ff5a00;">
+        <i class="fa-regular fa-pen-to-square" style="color: #ff5a00;"></i>
       </button>
     </div>
     <div class="col-12">
-      <div class="p-3 bg-light rounded text-dark">
-        <p><strong>Type de course :</strong> Marathon</p>
+      <div class="p-3" style="background-color: #fffdd0; color: #333; border-radius: 5px;">
+        <p><strong>Type de course :</strong> Semi-Marathon</p>
         <p><strong>Date :</strong> <%= @program.race_date.strftime("%d/%m/%Y") %></p>
         <p><strong>Objectif :</strong> <%= @program.objective_time %> min</p>
       </div>
     </div>
   </div>
 
-  <!-- Ma Semaine Type Section -->
   <div class="row mt-4">
     <div class="col-12">
-      <h3 class="text-primary">Ma semaine type</h3>
+      <h3 class="text-info" style="color: #251672; font-style: italic;">Ma semaine type</h3>
 
       <% @sessions.each do |session| %>
-        <div class="card mt-3" style="background-color: #f5f5dc;">
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= session.date.strftime("%A") %>
-              <span class="float-end" style="font-size: 0.9rem; color: #808080;">
+        <div class="card mt-3" style="background-color: #f5f5dc; border-radius: 5px; padding: 10px;">
+          <div class="card-body p-0">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title" style="margin: 0; font-weight: bold;">
+                <%= session.date.strftime("%A") %>
+              </h5>
+              <span style="font-size: 0.9rem; color: #808080;">
                 <% if session.run.run_interval_time %>
-                  <%= session.run.run_interval_time * session.run.run_interval_nbr %> min
+                  <%= session.run.run_interval_time * session.run.run_interval_nbr %>min
                 <% else %>
-                  <%= session.run.run_interval_km %> km
+                  <%= session.run.run_interval_km %>km
                 <% end %>
               </span>
-            </h5>
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="mb-1" style="background-color: #f4a460; color: #fff; padding: 5px 10px; border-radius: 5px;">
-                <%= session.run.kind %> - <%= session.run.run_interval_time %>min - <%= session.run.run_interval_pace %>km/h
-              </p>
             </div>
-            <p class="mt-2"><strong>Difficulté :</strong></p>
-            <p>
+            <div class="mt-2">
+              <div class="mb-1" style="background-color: #ffcc99; color: #000; padding: 5px 10px; border-radius: 5px;">
+                Échauffement - 20min - 5:55km
+              </div>
+              <div class="mb-1" style="background-color: #f4a460; color: #000; padding: 5px 10px; border-radius: 5px;">
+                10 × 400m - 4:00km
+              </div>
+            </div>
+            <p class="mt-3" style="font-style: italic; color: #555;">Difficulté</p>
+            <div class="d-flex justify-content-center">
               <% session.run.difficulty.times do %>
-                <span class="text-warning">★</span>
+                <span style="color: #ff5a00; font-size: 2rem; margin-right: 5px;">★</span>
               <% end %>
               <% (5 - session.run.difficulty).times do %>
-                <span class="text-muted">★</span>
+                <span style="color: #d3d3d3; font-size: 2rem; margin-right: 5px;">★</span>
               <% end %>
-            </p>
+            </div>
           </div>
         </div>
       <% end %>
     </div>
   </div>
+ <div class="row mt-4">
+      <div class="col-12 text-center">
+        <p style="font-size: 1.5rem; font-weight: bold; color: black;"><strong>Total temps :</strong> 4h25</p>
+        <p style="font-size: 1.5rem; font-weight: bold;color: black;"><strong>Nombre de séances :</strong> 4</p>
+        <button class="btn btn-primary text-white" style="background-color: #005792; border-radius: 20px; padding: 10px 20px; font-size: 1.2rem;">Let's Run</button>
+      </div>
+    </div>
 </div>
+
 
 <!-- Modal for Editing Profile -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">

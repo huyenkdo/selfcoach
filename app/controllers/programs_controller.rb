@@ -189,15 +189,13 @@ class ProgramsController < ApplicationController
       else
         render :edit
       end
-    # else
-    #   redirect_to recap_program_path, alert: 'Aucune donnée à mettre à jour.'
 
   end
 
   def recap
     @user = current_user
     @program = Program.find(params[:id])
-    @sessions = @program.running_sessions.where(date: Date.new(2024,8,19)..Date.new(2024,8,19)+7.days)
+    @sessions = @program.running_sessions.where(date: Date.today..Date.today+7.days)
   end
 
   private
