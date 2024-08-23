@@ -1,4 +1,5 @@
 <div class="start-background align-items-center d-flex justify-content-center" style="height: 100vh">
+  <%= link_to "X", root_path, class: "position-absolute text-info text-decoration-none fs-4", style: "top: 25px; right:25px" %>
   <div class="mx-5">
     <h2 class="text-primary fw-bold mb-4" style="font-size: xx-large">Crée ton compte</h2>
 
@@ -23,7 +24,7 @@
       </div>
 
       <div class="form-actions d-flex justify-content-center">
-        <%= f.button :submit, ">", class: "btn btn-info rounded-pill mt-4", style: "width: 75px" %>
+        <%= f.button :submit, ">", class: "btn btn-info rounded-pill mt-4 fs-5", style: "width: 90px" %>
       </div>
     <% end %>
   </div>
