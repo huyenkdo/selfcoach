@@ -1,3 +1,13 @@
+<div class="param-bar-home-page container-fluid d-flex align-items-center justify-content-between">
+  <%= link_to do %>
+      <button class="notification-home-page-btn"></button>
+    <% end %>
+
+  <%= link_to do %>
+    <button class="settings-btn"></button>
+  <% end %>
+</div>
+
 <div class="txt-intro">
   <p>On court</p>
   <p>aujourd'hui ?</p>
@@ -5,7 +15,7 @@
 
 <div class="day-run-container">
     <div class="info-item container-fluid d-flex align-items-center justify-content-between">
-      <p> <%= @run.date %> </p>
+      <p> <%= @running_sessions.date %> </p>
       <p> <%= @run.total_time %> min </p>
     </div>
   <div class="info-item">
