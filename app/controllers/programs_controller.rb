@@ -5,8 +5,8 @@ class ProgramsController < ApplicationController
   before_action :set_program, only: :show
 
   def show
-    @running_sessions = RunningSession.all
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @running_sessions = @program.running_sessions
+    @start_date = @program.running_sessions.first.date.beginning_of_week
   end
 
   def new
