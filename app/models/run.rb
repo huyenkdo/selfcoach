@@ -1,5 +1,5 @@
 class Run < ApplicationRecord
-  has_many :sessions
+  has_many :sessions, class_name: 'RunningSession'
 
   # validates :date, presence: true
   # validates :run_interval_km, presence: true
