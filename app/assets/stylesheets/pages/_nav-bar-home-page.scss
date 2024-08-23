@@ -3,7 +3,11 @@
   padding: 20px;
   padding-left: 50px;
   padding-right: 50px;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .calendar-btn {

@@ -1,0 +1,19 @@
+.info-item-star {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+}
+
+.star-notation {
+  background-image: url('./star-font.png');
+  color: white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  margin: 0;
+}

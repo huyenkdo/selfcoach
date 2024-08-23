@@ -14,31 +14,64 @@
 </div>
 
 <div class="day-run-container">
-    <div class="info-item container-fluid d-flex align-items-center justify-content-between">
-      <p> <%= @run_session.date %> </p>
-      <p> <%= @run.total_time %> min </p>
-    </div>
+  <div class="info-item container-fluid d-flex align-items-center justify-content-between">
+    <p class = run-session-date > <%= @run_session.date.strftime("%A %d %B") %> </p>
+    <p> <%= @run.total_time %> min </p>
+  </div>
   <div class="info-item">
       <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
-        <p>Hello</p>
-        <p>Hello</p>
-        <p>Hello</p>
+        <p> Echauffement </p>
+        <p> 20min </p>
+        <p>5:55/min/km</p>
       </div>
       <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
-        <p>Hello</p>
-        <p>Hello</p>
-        <p>Hello</p>
+        <p>10 x 400m </p>
+        <p> 4:00/min/km</p>
       </div>
       <div class="info-item-note">
         <p>  Difficulté </p>
       </div>
+      <div class="info-item-star container-fluid d-flex justify-content-center">
+        <p class="star-notation"></p>
+        <p class="star-notation"></p>
+        <p class="star-notation"></p>
+        <p class="star-notation"></p>
+        <p class="star-notation"></p>
+      </div>
   </div>
 </div>
 
-<div class="run-week container-fluid d-flex justify-content-center">
+<div class="run-week container-fluid d-flex justify-content-left">
   <%= link_to do %>
       <button class="week-program-btn"> Programme de la semaine ></button>
     <% end %>
+</div>
+
+<div class="next-week-calendar container-fluid d-flex justify-content-between">
+  <div class="next-week-card">
+    <h1> Lundi </h1>
+    <h1> 1 </h1>
+    <h2> durée </h2>
+    <p> entrainement </p>
+  </div>
+    <div class="next-week-card">
+    <h1> Lundi </h1>
+    <h1> 1 </h1>
+    <h2> durée </h2>
+    <p> entrainement </p>
+  </div>
+    <div class="next-week-card">
+    <h1> Lundi </h1>
+    <h1> 1 </h1>
+    <h2> durée </h2>
+    <p> entrainement </p>
+  </div>
+    <div class="next-week-card">
+    <h1> Lundi </h1>
+    <h1> 1 </h1>
+    <h2> durée </h2>
+    <p> entrainement </p>
+  </div>
 </div>
 
 <div class="data-home-page container-fluid d-flex justify-content-center ">
