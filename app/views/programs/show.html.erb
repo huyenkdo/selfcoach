@@ -1,31 +1,23 @@
 <div style="height: 100vh; background: #EFEFD0;">
-  <h1 style="font-size: 40px; font-weight: bold; color: #FF6B35; padding-top: 54px; padding-left: 36px;">Programme</h1>
+  <h1 style="font-size: 40px; font-weight: bold; color: #FF6B35; padding-top: 35px; padding-left: 100px;">Programme</h1>
 
-  <div>
-    <h3 style="font-size: 25px; font-weight: semi-bold; color: #004E89; padding-top: 24px; padding-bottom: 24px; padding-left: 36px;">Août</h3>
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 36px;">
+    <!-- Button to go to the previous month -->
+    <button onclick="changeMonth(-1)" style="background-color: #FF6B35; color: #EFEFD0; border: none; padding: 10px 25px; border-radius: 5px; font-size: 16px; font-weight: bold;">Précédent</button>
 
-    <% [0, 7, 14, 21].each_with_index do |offset, index| %>
-      <div style="position: relative;">
-        <div style="color: #004E89; background: #FFE4D0; position: absolute; left: 10; top: 68px; transform: rotate(270deg); white-space: nowrap; padding: 10px; border-radius: 5px; font-weight: regular;">Semaine <%= index + 1 %></div>
-        <div class="week-container" style="margin-left: 80px; color: #004E89;">
-          <%= week_calendar(start_date: @start_date + offset.days, events: @running_sessions, attribute: :date) do |date, running_sessions| %>
-            <%= localize(date, format: :long, locale: :fr) %>
+    <h3 id="month-label" style="font-size: 25px; font-weight: bold; color: #004E89; padding-top: 24px; padding-bottom: 24px;">Août 2024</h3>
 
-            <% running_sessions.each do |running_session| %>
-              <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; padding: 12px 10px; background: #F7C59F; color: #004E89;">
-                <%= running_session.run.kind %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    <!-- Button to go to the next month -->
+    <button onclick="changeMonth(1)" style="background-color: #FF6B35; color: #EFEFD0; border: none; padding: 10px 25px; border-radius: 5px; font-size: 16px; font-weight: bold;">Suivant</button>
   </div>
+
+  <div id="calendar-container"></div>
 </div>
 
 <style>
   .week-container {
-    overflow-x: scroll;
+    display: flex;
+    overflow-x: auto;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;
   }
@@ -48,8 +40,121 @@
     border-radius: 5px !important;
     text-align: center !important;
     width: 140px !important;
-    height: 80px !important;
+    height: 80px !important;*
+    flex: 0 0 14px;
     text-align: center;
     vertical-align: center;
   }
+
+  .week-element{
+    margin-top: 20px;
+    postion: relative;
+    display: flex;
+  }
+
+  .week-label {color: #004E89;
+    background: #FFE4D0;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(270deg);
+    white-space: nowrap;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: regular;
+    }
+
 </style>
+
+<!-- Place the script at the end of the body -->
+<script>
+  let currentMonth = 7; // 0-based index, where 0 = January and 7 = August
+  let currentYear = 2024;
+
+  function changeMonth(offset) {
+    console.log('Current Month Before Change:', currentMonth);
+    currentMonth += offset;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    } else if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    console.log('New Month:', currentMonth, 'New Year:', currentYear);
+    updateCalendar();
+  }
+
+  function updateCalendar() {
+    try {
+      // Update the month label
+      const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+      const monthLabel = document.getElementById('month-label');
+      if (!monthLabel) {
+        throw new Error("Month label element not found");
+      }
+      monthLabel.innerText = `${monthNames[currentMonth]} ${currentYear}`;
+
+      // Calculate the first day of the selected month
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+      const startOfWeek = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday, etc.
+
+      // Start drawing the calendar
+      const calendarContainer = document.getElementById('calendar-container');
+      if (!calendarContainer) {
+        throw new Error("Calendar container element not found");
+      }
+      calendarContainer.innerHTML = ''; // Clear previous content
+
+      let weekOffset = 1 - startOfWeek; // Offset to start the calendar on Monday
+      for (let week = 0; week < 5; week++) { // Loop through the weeks of the month
+        const weekElement = document.createElement('div');
+        weekElement.style.position = 'relative';
+        weekElement.style.marginTop = '20px';
+
+        // Add the week label
+        const weekLabel = document.createElement('div');
+        weekLabel.style.color = '#004E89';
+        weekLabel.style.background = '#FFE4D0';
+        weekLabel.style.position = 'absolute';
+        weekLabel.style.left = '10px';
+        weekLabel.style.top = '50%';
+        weekLabel.style.transform = 'translateY(-50%) rotate(270deg)';
+        weekLabel.style.whiteSpace = 'nowrap';
+        weekLabel.style.padding = '10px';
+        weekLabel.style.borderRadius = '5px';
+        weekLabel.style.fontWeight = 'regular';
+        weekLabel.innerText = `Semaine ${week + 1}`;
+        weekElement.appendChild(weekLabel);
+
+        const weekContainer = document.createElement('div');
+        weekContainer.classList.add('week-container');
+        weekContainer.style.marginLeft = '80px';
+        weekContainer.style.color = '#004E89';
+
+        for (let day = 0; day < 7; day++) { // Loop through the days of the week
+          const dayDate = new Date(currentYear, currentMonth, weekOffset + day + (week * 7));
+          const dayElement = document.createElement('div');
+          dayElement.classList.add('day');
+
+          if (dayDate.getMonth() === currentMonth) {
+            dayElement.innerText = dayDate.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+          } else {
+            dayElement.innerText = ''; // Clear cells not in the current month
+            dayElement.style.visibility = 'hidden';
+          }
+
+          weekContainer.appendChild(dayElement);
+        }
+
+        weekElement.appendChild(weekContainer);
+        calendarContainer.appendChild(weekElement);
+      }
+    } catch (error) {
+      console.error('Error updating calendar:', error);
+    }
+  }
+
+  // Call updateCalendar initially to set the correct month on load
+  updateCalendar();
+</script>
