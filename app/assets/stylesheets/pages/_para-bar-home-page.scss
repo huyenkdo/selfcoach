@@ -1,30 +1,61 @@
 .param-bar-home-page {
-  background-color: #EFEFD0;
   padding: 20px;
   padding-left: 50px;
-  padding-right: 50px;
+  padding-right: 25px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 24px;
+}
+.settings-btn, .notification-home-page-btn {
+  background-color: #FFE4D0;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
 .settings-btn {
-  background-image: url('./settings-font');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 35px;
-  height: 35px;
-  border: none;
-  background-color: transparent;
-  color: #004E89;
+  background-image: url('./settings-font.png');
 }
 
 .notification-home-page-btn {
   background-image: url('./notification-font.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 35px;
-  height: 35px;
-  border: none;
-  background-color: transparent;
-  color: #004E89;
+  margin-right: 14px;
+}
+
+.welcome-home-page {
+  color: black;
+}
+
+.welcome-home-page h1 {
+  font-weight: 600;
+}
+
+.welcome-home-page p {
+  margin-bottom: 0px;
+  font-size: 22px;
+
+}
+
+.welcoming-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-home-page {
+  margin-right: auto;
+  margin-left: 15px;
+  padding-top: 29px;
+}
+
+.param-bar-home-page {
+  display: flex;
+  align-items: center;
 }
