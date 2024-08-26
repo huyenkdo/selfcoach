@@ -195,7 +195,9 @@ class ProgramsController < ApplicationController
   def recap
     @user = current_user
     @program = Program.find(params[:id])
+    # @running_sessions = RunningSession.find(params[:id])
     @sessions = @program.running_sessions.where(date: Date.today..Date.today+7.days)
+    
   end
 
   private

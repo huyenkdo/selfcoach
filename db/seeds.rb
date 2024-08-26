@@ -40,7 +40,7 @@ run1 = Run.create!(
   run_interval_pace: 11,
   hr_zone: "Zone 2",
   difficulty: 2,
-  kind: "easy run"
+  kind: "Easy run"
 )
 
 run2 = Run.create!(
@@ -48,7 +48,7 @@ run2 = Run.create!(
   run_interval_pace: 10,
   hr_zone: "Zone 3",
   difficulty: 3,
-  kind: "long run"
+  kind: "Long run"
 )
 
 run3 = Run.create!(
@@ -58,7 +58,7 @@ run3 = Run.create!(
   rest_interval_time: 1,
   hr_zone: "Zone 5",
   difficulty: 5,
-  kind: "interval run",
+  kind: "Interval run",
   run_interval_nbr: 10
 )
 
@@ -66,42 +66,42 @@ puts "#{Run.count} runs created ! "
 
 RunningSession.create!(
   run_id: run1.id,
-  date: Date.new(2024, 8, 23),
+  date: Date.today+1.days,
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run2.id,
-  date: Date.new(2024, 8, 25),
+  date: Date.today+2.days,
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run3.id,
-  date: Date.new(2024, 8, 20),
+  date: Date.today+3.days,
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run1.id,
-  date: Date.new(2024, 9, 7),
+  date: Date.today+4.days,
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run2.id,
-  date: Date.new(2024, 7, 31),
+  date: Date.today+5.days,
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run3.id,
-  date: Date.new(2024, 8, 2),
+  date: Date.today+6.days,
   program_id: program.id,
   status: "Uncompleted"
 )
