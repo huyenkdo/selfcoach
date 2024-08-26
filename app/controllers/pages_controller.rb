@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     @run_session = RunningSession.order(:date).first
     @run_date = @run_session.date if @run_session
     @run = @run_session.run if @run_session
+    @user = current_user
 
     unless @run
       flash[:alert] = "Aucun run trouvé."
