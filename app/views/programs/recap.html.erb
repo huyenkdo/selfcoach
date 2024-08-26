@@ -9,11 +9,13 @@
       </button>
     </div>
     <div class="col-12">
-      <div class="p-3 text-info" style="background-color: #fffdd0; color: #333; border-radius: 5px;">
-        <p><strong>Prénom :</strong> <%= @user.first_name %></p>
-        <p><strong>Âge :</strong> <%= @user.age %></p>
-        <p><strong>Poids :</strong> <%= @user.weight %> kg</p>
-        <p><strong>VMA :</strong> <%= @user.vma %> km/h</p>
+      <div class="card custom-card">
+        <div class="p-3 text-info">
+          <p><strong>Prénom :</strong> <%= @user.first_name %></p>
+          <p><strong>Âge :</strong> <%= @user.age %></p>
+          <p><strong>Poids :</strong> <%= @user.weight %> kg</p>
+          <p><strong>VMA :</strong> <%= @user.vma %> km/h</p>
+        </div>
       </div>
     </div>
   </div>
@@ -28,10 +30,12 @@
       </button>
     </div>
     <div class="col-12">
-      <div class="p-3 text-info" style="background-color: #fffdd0; color: #333; border-radius: 5px;">
-        <p><strong>Type de course :</strong> Semi-Marathon</p>
-        <p><strong>Date :</strong> <%= @program.race_date.strftime("%d/%m/%Y") %></p>
-        <p><strong>Objectif :</strong> <%= @program.objective_time %> min</p>
+      <div class="card custom-card">
+        <div class="p-3 text-info" >
+          <p><strong>Type de course :</strong> Semi-Marathon</p>
+          <p><strong>Date :</strong> <%= @program.race_date.strftime("%d/%m/%Y") %></p>
+          <p><strong>Objectif :</strong> <%= @program.objective_time %> min</p>
+        </div>
       </div>
     </div>
   </div>
@@ -39,59 +43,51 @@
   <div class="row mt-4">
     <div class="col-12">
       <h3 class="fw-bold text-primary mb-3 fs-4" style="font-style: italic;">Ma semaine type</h3>
-
-        <% @sessions.each do |session| %>
-        <div class="card mt-3" style="background-color: #f5f5dc; border-radius: 5px; padding: 10px;">
-          <div class="card-body p-0">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title" style="margin: 0; font-weight: bold;">
-                <%= session.date.strftime("%A") %>
-              </h5>
-              <span style="font-size: 0.9rem; color: #808080;">
-                <% if session.run.run_interval_time %>
-                  <%= session.run.run_interval_time * session.run.run_interval_nbr %>min
-                <% else %>
-                  <%= session.run.run_interval_km %>km
-                <% end %>
-              </span>
-            </div>
-            <div class="mt-2">
-              <div class="mb-1" style="background-color: #ffcc99; color: #000; padding: 5px 10px; border-radius: 5px;">
-                <%= session.run.kind %>
+       <div class="card text-center custom-card">
+          <div class="card-header custom-card-header" >
+            <% @sessions.each do |session| %>
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title" style="margin: 0; ">
+                  <%= session.date.strftime("%A") %>
+                </h5>
+                <span style="font-size: 0.9rem; color: #808080;">
+                  <% if session.run.run_interval_time %>
+                    <%= session.run.run_interval_time * session.run.run_interval_nbr %>min
+                  <% else %>
+                    <%= session.run.run_interval_km %>km
+                  <% end %>
+                </span>
               </div>
-              <div class="mb-1" style="background-color: #f4a460; color: #000; padding: 5px 10px; border-radius: 5px;">
-                10 × 400m - 4:00km
-              </div>
+          </div>
+          <div class="mt-2">
+            <div class="mb-1" style="background-color: #ffcc99; color: #000; padding: 5px 10px; border-radius: 5px;">
+              <%= session.run.kind %>
             </div>
-            <p class="mt-3" style="font-style: italic; color: #555;">Difficulté</p>
-            <div class="d-flex justify-content-center">
-              <% session.run.difficulty.times do %>
-                <span style="color: #ff5a00; font-size: 2rem; margin-right: 5px;">★</span>
-              <% end %>
-              <% (5 - session.run.difficulty).times do %>
-                <span style="color: #d3d3d3; font-size: 2rem; margin-right: 5px;">★</span>
-              <% end %>
+            <div class="mb-1" style="background-color: #f4a460; color: #000; padding: 5px 10px; border-radius: 5px;">
+              <%= session.run.run_interval_time %>
             </div>
           </div>
+          <p class="mt-3" style="font-style: italic; color: #555;">Difficulté</p>
+          <div class="d-flex justify-content-center">
+            <% session.run.difficulty.times do %>
+              <span style="color: #ff5a00; font-size: 2rem; margin-right: 5px;">★</span>
+            <% end %>
+            <% (5 - session.run.difficulty).times do %>
+              <span style="color: #d3d3d3; font-size: 2rem; margin-right: 5px;">★</span>
+            <% end %>
+          </div>
         </div>
+      </div>
       <% end %>
     </div>
   </div>
- <div class="row mt-4">
-<<<<<<< HEAD
-      <div class="col-12 text-center text-info">
-        <p style="font-size: 1.5rem; font-weight: bold;"><strong>Total temps :</strong> 4h25</p>
-        <p style="font-size: 1.5rem; font-weight: bold;"><strong>Nombre de séances :</strong> 4</p>
-        <button class="btn btn-info text-white" style="background-color: #005792; border-radius: 20px; padding: 10px 20px; font-size: 1.2rem;">Let's Run</button>
-=======
-      <div class="col-12 text-center">
-        <p style="font-size: 1.5rem; font-weight: bold; color: black;"><strong>Total temps :</strong> 4h25</p>
-        <p style="font-size: 1.5rem; font-weight: bold;color: black;"><strong>Nombre de séances :</strong> 4</p>
-        <%= link_to 'Let\'s Run', home_path, class: 'btn btn-primary text-white', style: 'background-color: #005792; border-radius: 20px; padding: 10px 20px; font-size: 1.2rem;', role: 'button' %>
-
->>>>>>> main
-      </div>
+  <div class="row mt-4">
+    <div class="col-12 text-center text-info">
+      <p style="font-size: 1.5rem; font-weight: bold;"><strong>Total temps :</strong> 4h25</p>
+      <p style="font-size: 1.5rem; font-weight: bold;"><strong>Nombre de séances :</strong> <%= @sessions.count %></p>
+      <%= link_to 'Let\'s Run', home_path, class: 'btn btn-info text-white', style: 'background-color: #005792; border-radius: 20px; padding: 10px 20px; font-size: 1.2rem;', role: 'button' %>
     </div>
+  </div>
 </div>
 
 <!-- Modal for Editing Profile -->

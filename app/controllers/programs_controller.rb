@@ -197,7 +197,14 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
     # @running_sessions = RunningSession.find(params[:id])
     @sessions = @program.running_sessions.where(date: Date.today..Date.today+7.days)
-    
+
+    # start_date = Date.current.beginning_of_week(:monday)
+    # end_date = Date.current.end_of_week(:sunday)
+
+    # @run_session = RunningSession.order(:date).first
+    # @run_date = @run_session.date if @run_session
+    # @run = @run_session.run if @run_session
+
   end
 
   private
