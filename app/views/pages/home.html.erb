@@ -75,13 +75,17 @@
 
 
   <div class="data-home-page container-fluid d-flex flex-column">
-  <div class="progress custom-progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @completion_percentage %>" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
-  </div>
-  <div class="container-data-2 container-fluid d-flex justify-content-between">
-    <div class="container-days-before-run"><%= @days_before_race %> jours avant votre course</div>
-    <div class="container-run-this-week">Cette semaine vous avez couru <%= @km_this_week %> km</div>
-  </div>
+    <h1> Journal d'entrainement </h1>
+    <div class ="data-card-1">
+      <h5> Progression de l'entrainement </h5>
+      <div class="progress custom-progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @completion_percentage %>" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
+      </div>
+    </div>
+    <div class="container-data-2 container-fluid d-flex justify-content-between">
+      <div class="container-days-before-run"><%= @days_before_race %> jours avant votre course</div>
+      <div class="container-run-this-week">Cette semaine vous avez couru <%= @km_this_week %> km</div>
+    </div>
   </div>
 
 

@@ -1,5 +1,5 @@
 .data-home-page {
-  background-color: #EFEFD0;
+  background: none;
 }
 
 .data-program-btn {
@@ -36,7 +36,7 @@ progress {
 
 .container-days-before-run {
   background-color: #004E89;
-  color: #FFE4D0;
+  color: white;
   font-weight: 500;
   width: 150px;
   height: 160px;
@@ -53,7 +53,7 @@ progress {
 
 .container-run-this-week {
   background-color: #004E89;
-  color: #FFE4D0;
+  color: white;
   font-weight: 500;
   width: 150px;
   height: 160px;
@@ -67,4 +67,25 @@ progress {
   margin-right: 20px;
   flex: 0 0 auto;
   margin-left: 45px;
+}
+
+.data-home-page h1 {
+  color: black;
+  padding-top: 23px;
+  padding-left: 16px;
+}
+
+.data-card-1 {
+  background-color: white;
+  border-radius: 10px;
+  border: solid;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-card-1 h5 {
+  color: #004E89;
+  font-size: 14px;
+  padding-top: 12px;
+  padding-left: 15px;
+  font-weight: 550;
 }
