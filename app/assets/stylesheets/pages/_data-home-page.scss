@@ -10,4 +10,61 @@
   border: none;
   padding: 20px;
   padding-top: 28px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+progress {
+  margin-top: 10px;
+  border-radius: 25px;
+}
+
+.custom-progress {
+  height: 20px;
+  background-color: #FFE4D0;
+  margin: 15px;
+  border-radius: 15px;
+}
+
+.custom-progress-bar {
+  background-color: #004E89;
+}
+
+.container-data-2 {
+  padding: 20px;
+}
+
+.container-days-before-run {
+  background-color: #004E89;
+  color: #FFE4D0;
+  font-weight: 500;
+  width: 150px;
+  height: 160px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 20px;
+  flex: 0 0 auto;
+}
+
+.container-run-this-week {
+  background-color: #004E89;
+  color: #FFE4D0;
+  font-weight: 500;
+  width: 150px;
+  height: 160px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 20px;
+  flex: 0 0 auto;
+  margin-left: 45px;
 }
