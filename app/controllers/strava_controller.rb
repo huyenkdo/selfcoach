@@ -2,7 +2,7 @@ require 'rest-client'
 
 class StravaController < ApplicationController
   def connect
-    @path = "https://www.strava.com/oauth/authorize?client_id=#{ENV.fetch('STRAVA_CLIENT_ID')}&response_type=code&redirect_uri=http://localhost:3000#{strava_callback_path}&approval_prompt=force&scope=activity:read_all"
+    @path = "https://www.strava.com/oauth/authorize?client_id=#{ENV.fetch('STRAVA_CLIENT_ID')}&response_type=code&redirect_uri=#{Rails.configuration.base_url}#{strava_callback_path}&approval_prompt=force&scope=activity:read_all"
   end
 
   def callback
