@@ -21,26 +21,34 @@ progress {
 
 .custom-progress {
   height: 20px;
-  background-color: #FFE4D0;
+  background-color: #1A659E;
   margin: 15px;
   border-radius: 15px;
 }
 
 .custom-progress-bar {
-  background-color: #004E89;
+  background-color: #FF6B35;
 }
 
 .container-data-2 {
-  padding: 20px;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 20px;
 }
 
-.container-days-before-run {
-  background-color: #004E89;
-  color: white;
+.container-days-before-run,
+.container-run-this-week,
+.container-nbr-run-this-week {
+  background-color: white;
+  color: #1A659E;
   font-weight: 500;
-  width: 150px;
-  height: 160px;
-  border-radius: 10px;
+  width: 165px;
+  height: 110px;
+  border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   text-align: center;
@@ -49,24 +57,13 @@ progress {
   justify-content: space-around;
   margin-right: 20px;
   flex: 0 0 auto;
+  text-wrap: wrap;
 }
 
-.container-run-this-week {
-  background-color: #004E89;
-  color: white;
-  font-weight: 500;
-  width: 150px;
-  height: 160px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-right: 20px;
-  flex: 0 0 auto;
-  margin-left: 45px;
+.container-days-before-run:last-child,
+.container-run-this-week:last-child,
+.container-nbr-run-this-week:last-child {
+  margin-right: 0;
 }
 
 .data-home-page h1 {
@@ -79,7 +76,8 @@ progress {
   background-color: white;
   border-radius: 10px;
   border: solid;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: rgb(217, 214, 214);
+  margin-top: 20px;
 }
 
 .data-card-1 h5 {
@@ -88,4 +86,10 @@ progress {
   padding-top: 12px;
   padding-left: 15px;
   font-weight: 550;
+}
+
+.container-data-2 h3 {
+  font-size: 19px;
+  padding-top: 8px;
+  font-weight: 600;
 }
