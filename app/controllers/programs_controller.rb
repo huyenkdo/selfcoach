@@ -54,15 +54,15 @@ class ProgramsController < ApplicationController
     schedule = IceCube::Schedule.new
     # add long run occurrences
     schedule.add_recurrence_rule IceCube::Rule.weekly.day(long_run_day)
-    long_run_recurrences = schedule.occurrences_between(Date.current.next_occurring(:sunday), race_date, spans: true)
+    long_run_recurrences = schedule.occurrences_between(Date.current, race_date, spans: true)
     # add easy run occurrences
     schedule = IceCube::Schedule.new
     schedule.add_recurrence_rule IceCube::Rule.weekly.day(easy_run_days)
-    easy_run_recurrences = schedule.occurrences_between(Date.current.next_occurring(:sunday), race_date, spans: true)
+    easy_run_recurrences = schedule.occurrences_between(Date.current, race_date, spans: true)
     # add interval or tempo run occurrences
     schedule = IceCube::Schedule.new
     schedule.add_recurrence_rule IceCube::Rule.weekly.day(interval_or_tempo_run_day)
-    interval_or_tempo_run_recurrences = schedule.occurrences_between(Date.current.next_occurring(:sunday), race_date, spans: true)
+    interval_or_tempo_run_recurrences = schedule.occurrences_between(Date.current, race_date, spans: true)
     # choose from these recurrences the ones that will be interval runs or tempo runs
     interval_run_recurrences = interval_or_tempo_run_recurrences.map do |recurrence|
       recurrence if [0, 1].sample.zero?
@@ -73,9 +73,9 @@ class ProgramsController < ApplicationController
     if program.save
       @user.vma = (52 - (0.35 * @user.age)) / 3.5 if @user.vma.blank?
 
-      easy_pace = @user.vma * 0.65
-      tempo_pace = @user.vma * 0.85
-      interval_pace = @user.vma * 0.95
+      easy_pace = (60 / (@user.vma * 0.65)).round(2)
+      tempo_pace = (60 / (@user.vma * 0.85)).round(2)
+      interval_pace = (60 / (@user.vma * 0.95)).round(2)
 
       base_long_run_distance = program_params[:objective_km].to_f * 0.2
       target_long_run_distance = program_params[:objective_km].to_f
@@ -93,7 +93,7 @@ class ProgramsController < ApplicationController
         easy_run = Run.create!(
           kind: 'Easy',
           run_interval_km: distance = rand(2..5),
-          run_interval_time: ((distance / easy_pace) * 60).round(2),
+          run_interval_time: (distance * easy_pace).round(2),
           run_interval_pace: easy_pace,
           run_interval_nbr: 1,
           difficulty: 1,
@@ -111,7 +111,7 @@ class ProgramsController < ApplicationController
         long_run = Run.create!(
           kind: 'Long',
           run_interval_km: long_run_distance,
-          run_interval_time: ((long_run_distance / easy_pace) * 60).round(2),
+          run_interval_time: (long_run_distance * easy_pace).round(2),
           run_interval_pace: easy_pace,
           run_interval_nbr: 1,
           difficulty:
@@ -133,10 +133,10 @@ class ProgramsController < ApplicationController
         interval_run = Run.create!(
           kind: 'Interval',
           run_interval_time: run_time = rand(1..3),
-          run_interval_km: ((run_time / 60) * interval_pace).round(2),
+          run_interval_km: (run_time / interval_pace).round(2),
           run_interval_pace: interval_pace,
           rest_interval_time: rest_time = 1,
-          rest_interval_km: ((rest_time / 60) * interval_pace).round(2),
+          rest_interval_km: (rest_time / interval_pace).round(2),
           rest_interval_pace: easy_pace,
           run_interval_nbr: rand(7..10),
           difficulty: 5,
@@ -154,7 +154,7 @@ class ProgramsController < ApplicationController
         tempo_run = Run.create!(
           kind: 'Tempo',
           run_interval_km: tempo_run_distance,
-          run_interval_time: ((tempo_run_distance / tempo_pace) * 60).round(2),
+          run_interval_time: (tempo_run_distance * tempo_pace).round(2),
           run_interval_pace: tempo_pace,
           run_interval_nbr: 1,
           difficulty: 4,
@@ -195,7 +195,7 @@ class ProgramsController < ApplicationController
   def recap
     @user = current_user
     @program = Program.find(params[:id])
-    @sessions = @program.running_sessions.where(date: Date.today..Date.today+7.days)
+    @sessions = @program.running_sessions.where(date: Date.current.next_occurring(:monday)..Date.current.next_occurring(:sunday))
   end
 
   private
