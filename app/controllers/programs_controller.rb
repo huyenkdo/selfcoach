@@ -17,6 +17,11 @@ class ProgramsController < ApplicationController
     @user = current_user
     program = Program.new(program_params)
 
+    objective_km = program_params[:objective_km]
+    objective_km = 21.1 if program_params[:objective_km] = "21.1 (Semi-Marathon)"
+    objective_km = 42.195 if program_params[:objective_km] = "42.195 (Marathon)"
+    program.objective_km = objective_km
+
     free_days = program_params[:free_days].reject(&:blank?).map(&:to_i)
     program.free_days = free_days
 
@@ -195,7 +200,7 @@ class ProgramsController < ApplicationController
   def recap
     @user = current_user
     @program = Program.find(params[:id])
-    @sessions = @program.running_sessions.where(date: Date.current.next_occurring(:monday)..Date.current.next_occurring(:sunday))
+    @sessions = @program.running_sessions.where(date: (Date.current.next_occurring(:monday))..Date.current.next_occurring(:monday) + 6)
   end
 
   private

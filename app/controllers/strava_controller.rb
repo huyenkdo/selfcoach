@@ -44,6 +44,7 @@ class StravaController < ApplicationController
   end
 
   def sync
+    refresh_strava_token if current_user.strava_token_expired?
     url = "https://www.strava.com/api/v3/athlete/activities"
     request = RestClient.get(url, { 'Authorization' => "Bearer #{current_user.strava_access_token}" })
     response = JSON.parse(request.body)
