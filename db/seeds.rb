@@ -87,21 +87,21 @@ RunningSession.create!(
 
 RunningSession.create!(
   run_id: run1.id,
-  date: Date.new(2024, 9, 3),
+  date: Date.new(2024, 8, 30),
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run2.id,
-  date: Date.new(2024, 7, 31),
+  date: Date.new(2024, 9, 1),
   program_id: program.id,
   status: "Uncompleted"
 )
 
 RunningSession.create!(
   run_id: run3.id,
-  date: Date.new(2024, 8, 2),
+  date: Date.new(2024, 9, 3),
   program_id: program.id,
   status: "Uncompleted"
 )
