@@ -1,55 +1,15 @@
-<div style="height: 100vh; background: #EFEFD0;">
-  <h1 style="font-size: 40px; font-weight: bold; color: #FF6B35; padding-top: 54px; padding-left: 36px;">Programme</h1>
+<div style="background: #F5F1F1;">
+  <div style="display: flex; justify-content: center;">
+    <h1 style="font-size: 40px; font-weight: bold; color: #FF6B35; padding-top: 54px; padding-left: 36px;">Programme</h1>
+  </div>
 
-  <div>
-    <h3 style="font-size: 25px; font-weight: semi-bold; color: #004E89; padding-top: 24px; padding-bottom: 24px; padding-left: 36px;">Août</h3>
+  <%= custom_calendar(start_date: @start_date, events: @running_sessions, attribute: :date) do |date, running_sessions| %>
+    <%= localize(date, format: :long, locale: :fr) %>
 
-    <% [0, 7, 14, 21].each_with_index do |offset, index| %>
-      <div style="position: relative;">
-        <div style="color: #004E89; background: #FFE4D0; position: absolute; left: 10; top: 68px; transform: rotate(270deg); white-space: nowrap; padding: 10px; border-radius: 5px; font-weight: regular;">Semaine <%= index + 1 %></div>
-        <div class="week-container" style="margin-left: 80px; color: #004E89;">
-          <%= week_calendar(start_date: @start_date + offset.days, events: @running_sessions, attribute: :date) do |date, running_sessions| %>
-            <%= localize(date, format: :long, locale: :fr) %>
-
-            <% running_sessions.each do |running_session| %>
-              <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; padding: 12px 10px; background: #F7C59F; color: #004E89;">
-                <%= running_session.run.kind %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+    <% running_sessions.each do |running_session| %>
+      <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; padding: 12px 10px; background: #F7C59F; color: #004E89;">
+        <%= running_session.run.kind %>
       </div>
     <% end %>
-  </div>
+  <% end %>
 </div>
-
-<style>
-  .week-container {
-    overflow-x: scroll;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;
-  }
-
-  .week-container::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
-  }
-
-  .simple-calendar table {
-    table-layout: fixed;
-    border-collapse: separate;
-    border-spacing: 5px;
-    border: none;
-  }
-
-  .day {
-    color: #004E89;
-    background-color: #FFE4D0 !important;
-    padding: 15px !important;
-    border-radius: 5px !important;
-    text-align: center !important;
-    width: 140px !important;
-    height: 80px !important;
-    text-align: center;
-    vertical-align: center;
-  }
-</style>

@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_091854) do
     t.integer "run_interval_nbr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date"
   end
 
   create_table "users", force: :cascade do |t|
