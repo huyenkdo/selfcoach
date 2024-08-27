@@ -85,9 +85,9 @@
             </div>
 
             <!-- Run details -->
-            <div class="p-3" style="border-radius: 10px;">
-              <p class="mb-1" style="font-weight: bold; background-color: #FFE4D0;">Échauffement - 20 min - <%= session.run.run_interval_km %>km</p>
-              <p class="mb-0">10 x 400m - 5:55/min/km</p>
+            <div class="col p-3" style="border-radius: 10px; background-color: #FFE4D0;">
+              <p class="mb-1" style="font-weight: bold; background-color: #FFE4D0;">Échauffement - 20 min </p>
+              <p class="mb-0 "><%= session.run.kind %> - <%= session.run.run_interval_km %></p>
             </div>
           </div>
         </div>
