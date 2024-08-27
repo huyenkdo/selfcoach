@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :update]
   get '/strava/callback', to: 'strava#callback'
   get '/strava/connect', to: 'strava#connect'
+  get '/strava/sync', to: 'strava#sync'
 
   resources :programs, only: [:show, :new, :create, :edit, :update] do
     member do
