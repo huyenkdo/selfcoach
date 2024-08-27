@@ -1,0 +1,97 @@
+
+
+<div class="calendar-controls" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+  <button onclick="changeMonth(-1)" style="padding: 8px 12px;">&#8592; Mois précédent</button>
+  <span id="current-month" style="font-weight: bold; font-size: 18px; margin: 0 10px; text-align: center; min-width: 150px;"></span>
+  <button onclick="changeMonth(1)" style="padding: 8px 12px;">Mois suivant &#8594;</button>
+</div>
+
+<div id="calendar-container" class="month" style="display: flex; flex-direction: column; align-items: center; width: 100%;"></div>
+
+<script>
+  let currentDate = new Date();
+
+  function renderCalendar() {
+    const start_date = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const end_date = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    const startDayOfWeek = start_date.getDay() === 0 ? 7 : start_date.getDay();
+    const endDay = end_date.getDate();
+
+    const daysInCalendar = [];
+    for (let i = 1; i < startDayOfWeek; i++) {
+      daysInCalendar.push("");
+    }
+    for (let i = 1; i <= endDay; i++) {
+      daysInCalendar.push(i);
+    }
+
+    const weeks = [];
+    while (daysInCalendar.length) {
+      weeks.push(daysInCalendar.splice(0, 7));
+    }
+
+    let calendarHTML = '';
+    weeks.forEach((week, index) => {
+      calendarHTML += `
+        <div class="week" style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px; width: 100%;">
+          <div class="week-label" style="background-color: #eef2e0; padding: 10px; text-align: center; width: 60px; height: 60px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 5px;">
+            Semaine ${index + 1}
+          </div>
+          <div class="days" style="display: flex; justify-content: space-evenly; flex-grow: 1; max-width: 100%; padding: 0 5px;">
+      `;
+
+      week.forEach(day => {
+        if (day) {
+          calendarHTML += `
+            <div class="day" style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              width: 50px;
+              height: 50px;
+              background-color: #f4a460;
+              margin: 5px;
+              text-align: center;
+              border-radius: 10px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              transition: transform 0.2s ease, box-shadow 0.2s ease;
+              cursor: pointer;
+            " onclick="highlightDay(this)">
+              <strong style="font-size: 8px; color: #333;">${new Date(currentDate.getFullYear(), currentDate.getMonth(), day).toLocaleDateString('fr-FR', { weekday: 'long' })}</strong>
+              <div style="font-size: 12px; font-weight: bold; margin-top: 5px; color: #fff;">${day}</div>
+              <div style="font-size: 6px; color: #333; margin-top: 5px;">durée<br> entraînement</div>
+            </div>
+          `;
+        } else {
+          calendarHTML += `<div style="flex: 1; height: 50px;"></div>`;
+        }
+      });
+
+      calendarHTML += `
+          </div>
+        </div>
+      `;
+    });
+
+    document.getElementById('calendar-container').innerHTML = calendarHTML;
+    document.getElementById('current-month').innerText = currentDate.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+  }
+
+  function changeMonth(direction) {
+    currentDate.setMonth(currentDate.getMonth() + direction);
+    renderCalendar();
+  }
+
+  function highlightDay(element) {
+    var highlighted = document.querySelector('.day.highlighted');
+    if (highlighted) {
+      highlighted.classList.remove('highlighted');
+    }
+    element.classList.add('highlighted');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    renderCalendar();
+  });
+</script>

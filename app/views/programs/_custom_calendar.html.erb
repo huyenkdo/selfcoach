@@ -1,0 +1,68 @@
+ <div>
+  <div style="display: flex; justify-content: space-evenly; align-items: center;">
+    <%= link_to calendar.url_for_previous_view do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
+
+    <h3 style="font-size: 25px; font-weight: scroll-padding-inline-end: ;mi-bold; color: #004E89; padding-top: 24px; padding-bottom: 24px;"><%= t('date.month_names')[start_date.month] %></h3>
+
+    <%= link_to calendar.url_for_next_view do %>
+      <i class="fa-solid fa-chevron-right"></i>
+    <% end %>
+  </div>
+
+  <% date_range.each_slice(7).each_with_index do |week, index| %>
+    <div style="position: relative;">
+      <div style="color: #004E89; background: #FFE4D0; position: absolute; left: 10; top: 68px; transform: rotate(270deg); white-space: nowrap; padding: 10px; border-radius: 5px; font-weight: regular;">
+        Semaine <%= index + 1 %>
+      </div>
+      <div class="week-container" style="margin-left: 80px; color: #004E89;">
+        <div class="simple-calendar">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <% week.each do |day| %>
+                  <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+                    <%= t('date.abbr_day_names')[day.wday] %>
+                    <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+                  <% end %>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .week-container {
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
+  }
+
+   .week-container::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
+
+  .simple-calendar table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border: none;
+  }
+
+  .day {
+    color: #004E89;
+    background-color: #FFE4D0 !important;
+    padding: 15px !important;
+    border-radius: 5px !important;
+    text-align: center !important;
+    width: 140px !important;
+    height: 80px !important;
+    text-align: center;
+    vertical-align: center;
+  }
+</style>
