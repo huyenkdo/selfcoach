@@ -43,47 +43,58 @@
     </div>
   </div>
 
-
-
   <div class="next-week-calendar container-fluid d-flex justify-content-between">
     <% (Date.current..(Date.current + 6.days)).each do |date| %>
-      <div class="next-week-card">
-        <div class ="emoji-card-day container-fluid d-flex align-items-center justify-content-between">
-          <h1>
-            <% session = @next_week_sessions.find { |s| s.date == date } %>
+      <turbo-frame id="<%= date.to_s %>">
+        <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
+          <div class="emoji-card-day container-fluid d-flex align-items-center justify-content-between">
+            <h1>
+              <% session = @next_week_sessions.find { |s| s.date == date } %>
+              <% if session %>
+                🏃
+              <% else %>
+                😴
+              <% end %>
+            </h1>
+            <h4> <%= date.strftime("%A %d") %> </h4>
+          </div>
+          <div class="kind-time-card">
             <% if session %>
-              🏃
+              <p><%= session.run.kind.capitalize %></p>
+              <h2><%= session.run.formatted_time(session.run.total_time) %></h2>
             <% else %>
-              😴
+              <p>Repos</p>
+              <h2></h2>
             <% end %>
-          </h1>
-          <h4> <%= date.strftime("%A %d") %> </h4>
+          </div>
         </div>
-        <div class="kind-time-card">
-          <% if session %>
-            <p><%= session.run.kind.capitalize %></p>
-            <h2><%= session.run.formatted_time(session.run.total_time) %></h2>
-          <% else %>
-            <p>Repos</p>
-            <h2></h2>
-          <% end %>
-        </div>
-      </div>
+      </turbo-frame>
     <% end %>
   </div>
 
-
-
   <div class="data-home-page container-fluid d-flex flex-column">
-  <div class="progress custom-progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @completion_percentage %>" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
+    <h1> 📊 Journal d'entrainement </h1>
+    <div class="data-card-1">
+      <h5> Progression de l'entrainement </h5>
+      <div class="progress custom-progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @completion_percentage %>" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
+      </div>
+    </div>
+    <div class="container-data-2 container-fluid d-flex justify-content-between">
+      <div class="container-days-before-run">
+        <h3> <%= @days_before_race %> jours </h3>
+        <p> avant votre course</p>
+      </div>
+      <div class="container-run-this-week">
+        <h3> <%= @km_this_week %> Km </h3>
+        <p> parcourus cette semaine </p>
+      </div>
+      <div class="container-nbr-run-this-week">
+        <h3> <%= @km_this_week %> Km </h3>
+        <p> parcourus cette semaine </p>
+      </div>
+    </div>
   </div>
-  <div class="container-data-2 container-fluid d-flex justify-content-between">
-    <div class="container-days-before-run"><%= @days_before_race %> jours avant votre course</div>
-    <div class="container-run-this-week">Cette semaine vous avez couru <%= @km_this_week %> km</div>
-  </div>
-  </div>
-
 
   <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
   <%= link_to program_path(@program) do %>
@@ -97,5 +108,19 @@
   <%= link_to home_path do %>
     <button class="profil-btn"></button>
   <% end %>
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sessionModalLabel">Session Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <turbo-frame id="session_details"></turbo-frame>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,6 +1,36 @@
-
-  .day.highlighted {
-    background-color: #ffcc00; /* Yellow background for highlight */
-    transform: scale(1.1); /* Slightly increase the size */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase shadow for effect */
+<style>
+  .week-container {
+    display: flex;
+    gap: 10px;  /* Adjusts the space between days */
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    justify-content: center;  /* Centers the days horizontally */
   }
+
+  .week-container::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
+
+  .simple-calendar table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border: none;
+    width: 100%;  /* Ensures the table takes full width */
+  }
+
+  .day {
+    color: #004E89;
+    background-color: #FFE4D0 !important;
+    padding: 15px !important;
+    border-radius: 5px !important;
+    text-align: center !important;
+    width: 140px !important;
+    height: 80px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
