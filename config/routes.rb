@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
   root to: "pages#welcome"
   resource :profile, only: [:show, :update]
+  get '/strava/callback', to: 'strava#callback'
+  get '/strava/connect', to: 'strava#connect'
 
   resources :programs, only: [:show, :new, :create, :edit, :update] do
     member do

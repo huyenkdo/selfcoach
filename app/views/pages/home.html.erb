@@ -1,95 +1,95 @@
 <div class="content-home-page">
-  <div class="param-bar-home-page container-fluid d-flex align-items-center justify-content-between">
-    <%= link_to do %>
+  <div class="welcoming-top container-fluid d-flex align-items-center justify-content-between">
+    <div class="welcome-home-page">
+      <p>Welcome 👋 </p>
+      <h1> <%= @user.first_name %> </h1>
+    </div>
+    <div class="param-bar-home-page d-flex align-items-center">
+      <%= link_to do %>
         <button class="notification-home-page-btn"></button>
       <% end %>
-
-    <%= link_to do %>
-      <button class="settings-btn"></button>
-    <% end %>
-  </div>
-
-  <div class="txt-intro">
-    <p>On court</p>
-    <p>aujourd'hui ?</p>
+      <%= link_to do %>
+        <button class="settings-btn"></button>
+      <% end %>
+    </div>
   </div>
 
   <div class="day-run-container">
     <div class="info-item container-fluid d-flex align-items-center justify-content-between">
-      <p class = run-session-date > <%= @run_session.date.strftime("%A %d %B") %> </p>
-      <p> <%= @run.total_time %> min </p>
+      <p class="run-session-date"><%= @run_session.date.strftime("%A %d %B") %></p>
+      <div class="info-item-star d-flex">
+        <% @run_star.times do %>
+        <p class="star-notation">★</p>
+        <% end %>
+      </div>
     </div>
     <div class="info-item">
-        <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
-          <p> Echauffement </p>
-          <p> 20min </p>
-          <p>5:55/min/km</p>
+      <div class="block-seance container-fluid d-flex align-items-center">
+        <p>Echauffement </p>
+        <p> 20 min </p>
+        <p>5:55/min/km</p>
+      </div>
+      <% if @run.kind == "interval run" %>
+        <div class="block-seance container-fluid d-flex align-items-center">
+          <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
+          <p><%= @session_details[:interval_pace] %>/min/km</p>
         </div>
-        <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
-          <p>10 x 400m </p>
-          <p> 4:00/min/km</p>
+      <% elsif @run.kind == "easy run" || @run.kind == "long run" %>
+        <div class="block-seance container-fluid d-flex align-items-center">
+          <p><%= @session_details[:distance] %> km</p>
+          <p><%= @session_details[:pace] %>/min/km</p>
         </div>
-        <div class="info-item-note">
-          <p>  Difficulté </p>
-        </div>
-        <div class="info-item-star container-fluid d-flex justify-content-center">
-          <p class="star-notation"></p>
-          <p class="star-notation"></p>
-          <p class="star-notation"></p>
-          <p class="star-notation"></p>
-          <p class="star-notation"></p>
-        </div>
+      <% end %>
     </div>
   </div>
 
-  <div class="run-week container-fluid d-flex justify-content-left">
-    <%= link_to do %>
-        <button class="week-program-btn"> Programme de la semaine ></button>
-      <% end %>
-  </div>
+
 
   <div class="next-week-calendar container-fluid d-flex justify-content-between">
-    <div class="next-week-card">
-      <h1> Lundi </h1>
-      <h1> 1 </h1>
-      <h2> 50min </h2>
-      <p> easy-run </p>
-    </div>
-    <div class="next-week-card">
-      <h1> Mardi</h1>
-      <h1> 2 </h1>
-      <h2> 1h </h2>
-      <p> Tempo-Run </p>
-    </div>
-    <div class="next-week-card">
-      <h1> Jeudi </h1>
-      <h1> 4 </h1>
-      <h2> 1h </h2>
-      <p> easy-run </p>
-    </div>
-    <div class="next-week-card">
-      <h1> Dimanche </h1>
-      <h1> 7 </h1>
-      <h2> 2h00 </h2>
-      <p> long-run </p>
-    </div>
+    <% (Date.current..(Date.current + 6.days)).each do |date| %>
+      <div class="next-week-card">
+        <div class ="emoji-card-day container-fluid d-flex align-items-center justify-content-between">
+          <h1>
+            <% session = @next_week_sessions.find { |s| s.date == date } %>
+            <% if session %>
+              🏃
+            <% else %>
+              😴
+            <% end %>
+          </h1>
+          <h4> <%= date.strftime("%A %d") %> </h4>
+        </div>
+        <div class="kind-time-card">
+          <% if session %>
+            <p><%= session.run.kind.capitalize %></p>
+            <h2><%= session.run.formatted_time(session.run.total_time) %></h2>
+          <% else %>
+            <p>Repos</p>
+            <h2></h2>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
+
+
 
   <div class="data-home-page container-fluid d-flex flex-column">
-    <%= link_to do %>
-      <button class="data-program-btn"> statistiques et données d'entrainement </button>
-    <% end %>
-    <div class="progress custom-progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar custom-progress-bar" style="width: 75%">75%</div>
+    <h1> Journal d'entrainement </h1>
+    <div class ="data-card-1">
+      <h5> Progression de l'entrainement </h5>
+      <div class="progress custom-progress" role="progressbar" aria-label="Example with label" aria-valuenow="<%= @completion_percentage %>" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
+      </div>
     </div>
-    <div class ="container-data-2 container-fluid d-flex justify-content-between">
-      <div class = "container-days-before-run"> 25 jours avant votre course </div>
-      <div class = "container-run-this-week"> Cette semaine vous avez couru 38km </div>
+    <div class="container-data-2 container-fluid d-flex justify-content-between">
+      <div class="container-days-before-run"><%= @days_before_race %> jours avant votre course</div>
+      <div class="container-run-this-week">Cette semaine vous avez couru <%= @km_this_week %> km</div>
     </div>
   </div>
-</div>
 
-<div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
+
+  <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
   <%= link_to do %>
       <button class="calendar-btn"></button>
     <% end %>
@@ -101,4 +101,5 @@
   <%= link_to do %>
     <button class="profil-btn"></button>
   <% end %>
+  </div>
 </div>

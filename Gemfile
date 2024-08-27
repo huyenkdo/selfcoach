@@ -54,6 +54,7 @@ gem "simple_calendar"
 gem 'ice_cube', '~> 0.17.0'
 gem 'activesupport', '~> 7.1.3.4'
 gem 'rails-i18n', '~> 7.0.0'
+gem 'rest-client', '~> 2.1'
 
 group :development, :test do
   gem "dotenv-rails"

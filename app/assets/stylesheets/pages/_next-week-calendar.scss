@@ -1,17 +1,18 @@
 .next-week-calendar {
-  background-color: #EFEFD0;
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
   justify-content: center;
   align-items: center;
+  padding-top: 16px;
+  padding-bottom: 20px;
 }
 
 .next-week-card {
-  background-color: #FFE4D0;
+  background-color: white;
   width: 150px;
   height: 160px;
-  border-radius: 10px;
+  border-radius: 23px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   text-align: center;
@@ -20,6 +21,7 @@
   justify-content: space-around;
   margin-right: 20px;
   flex: 0 0 auto;
+  border-color: gray;
 }
 
 .next-week-card h1 {
@@ -27,6 +29,7 @@
   margin: 0;
   color: #004E89;
   font-weight: 600;
+  font-size: 17px;
 }
 
 .next-week-card h2 {
@@ -34,17 +37,49 @@
   margin: 5px 0;
   color: #004E89;
   font-weight: 200;
+  padding-left: 8px;
+  font-weight: 600;
+}
+
+.next-week-card h4 {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #004E89;
+  font-weight: 200;
+  padding-left: 8px;
+  font-weight: 600;
+
 }
 
 .next-week-card p {
   font-size: 1em;
-  background-color: #F7C59F;
   color: #004E89;
+  margin: 0;
+  padding-left: 8px;
+}
+
+.kind-time-card {
+  background-color: #FFE4D0;
   border-radius: 10px;
-  height: 130px;
-  width: 130px;
+  padding: 10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-top: 10px;
+  width: 129px;
+  border-radius: 22px;
+  height: 70px;
+}
+
+.kind-time-card .kind {
+  margin: 0;
+  padding: 0;
+  height: 20px;
+}
+
+.kind-time-card .time {
+  margin: 0;
+  padding: 0;
+  height: 20px;
 }
