@@ -6,7 +6,7 @@
         <div id="objectives" data-toggle-target="togglableBlock1">
           <h2 class="fw-bold text-info mb-3 fs-4">Ton objectif de course ?</h2>
             <div class="d-flex justify-content-between mb-4">
-              <%= f.input :objective_km, as: :select, collection: [5, 10, 21.1, 42.195], label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white" }, wrapper_html: { class: 'flex-grow-1' } %>
+              <%= f.input :objective_km, as: :select, collection: [5, 10, "21.1 (Semi-Marathon)", "42.195 (Marathon)"], label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white" }, wrapper_html: { class: 'flex-grow-1' } %>
               <span class="input-group-text align-self-baseline" id="basic-addon2" style="border: none; background: none;">km</span>
             </div>
           <h2 class="fw-bold text-info mb-3 fs-4">Date de ta course ?</h2>
