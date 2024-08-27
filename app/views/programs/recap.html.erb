@@ -68,12 +68,13 @@
           <div class="card-body p-3">
             <!-- Icon and Day -->
             <div class="d-flex align-items-center mb-2">
-              <div class="me-2">
-                <img src="path-to-icon.png" alt="Icon" style="width: 30px; height: 30px;"> <!-- Replace with the correct path to the icon -->
+              <div class=" me-2 mt-3 text-center">
+                <p>
+                🏃</p>
               </div>
               <div class="flex-grow-1">
-                <h5 class="card-title mb-0 text-left" style="font-weight: bold;">
-                  <%= session.date.strftime("%A") %> <span style="font-weight: normal;">(<%= session.run.run_interval_time %>min)</span>
+                <h5 class="card-title mb-0 text-center" style="font-weight: bold;">
+                  <%= session.date.strftime("%A") %> <span style="font-weight: normal;"></span>
                 </h5>
               </div>
               <div>
@@ -84,7 +85,7 @@
             </div>
 
             <!-- Run details -->
-            <div class="p-3" style="background-color: #f8d7da; border-radius: 10px;">
+            <div class="p-3" style="border-radius: 10px;">
               <p class="mb-1" style="font-weight: bold;">Échauffement -20 min - <%= session.run.run_interval_km %>km</p>
               <p class="mb-0">10 x 400m - 5:55/min/km</p>
             </div>
