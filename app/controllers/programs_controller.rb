@@ -200,7 +200,7 @@ class ProgramsController < ApplicationController
   def recap
     @user = current_user
     @program = Program.find(params[:id])
-    @sessions = @program.running_sessions.where(date: Date.current.next_occurring(:monday)..Date.current.next_occurring(:sunday))
+    @sessions = @program.running_sessions.where(date: (Date.current.next_occurring(:monday))..Date.current.next_occurring(:monday) + 6)
   end
 
   private
