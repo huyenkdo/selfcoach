@@ -6,12 +6,16 @@ Rails.application.routes.draw do
   get '/strava/connect', to: 'strava#connect'
   get '/strava/sync', to: 'strava#sync'
 
+  resources :running_sessions, only: :show
+
   resources :programs, only: [:show, :new, :create, :edit, :update] do
     member do
       get :recap
       resources :running_sessions, only: [:index, :edit, :update]
     end
   end
+
+
 
   get "/home", to: "pages#home", as: "home"
 

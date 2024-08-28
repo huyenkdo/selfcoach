@@ -32,11 +32,14 @@ class PagesController < ApplicationController
     @days_before_race = (race_date - Date.current).to_i
 
     @km_this_week = 0
+    @total_time_this_week = 0
     RunningSession.joins(:run).where(date: start_date..end_date).each do |session|
       run = session.run
       @km_this_week += run.run_interval_km * run.run_interval_nbr
+      @total_time_this_week += run.total_time
     end
     @km_this_week = @km_this_week.round(2)
+    @formatted_total_time_this_week = @run.formatted_time(@total_time_this_week)
   end
 
   def recap
