@@ -1,0 +1,10 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <h2><%= localize(@running_session.date, format: :long, locale: :fr, ) %></h2>
+  <h5><%= @running_session.run.total_time %> min</h5>
+
+  <div style="background: #FFE4D0; padding: 10px 20px; margin-top: 10px;">
+    <strong>Entrainement:</strong>
+    Course de 5 min à intervalle de 2 min
+    Allure : 8km/h
+  </div>
+</div>

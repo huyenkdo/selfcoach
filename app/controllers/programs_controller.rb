@@ -200,7 +200,12 @@ class ProgramsController < ApplicationController
   def recap
     @user = current_user
     @program = Program.find(params[:id])
-    @sessions = @program.running_sessions.where(date: (Date.current.next_occurring(:monday))..Date.current.next_occurring(:monday) + 6)
+    @sessions = @program.running_sessions.where(date: (Date.current.next_occurring(:monday))..Date.current.next_occurring(:monday) + 6).order(:date)
+    @km_this_week = 0
+    @sessions.each do |session|
+        @km_this_week += (session.run.run_interval_km * session.run.run_interval_nbr)
+    end
+    @km_this_week = @km_this_week.round(2)
   end
 
   private
