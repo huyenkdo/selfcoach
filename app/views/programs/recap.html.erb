@@ -74,11 +74,11 @@
         <div class="card shadow-sm">
           <div class="card-body p-3">
             <!-- Icon and Day -->
-
-             <div class="d-flex align-items-center justify-content-center mb-2 flex-grow-1">
+<div class="date-icon">
+             <div class="d-flex align-items-center justify-content-center mb-4 flex-grow-1 ">
               <!-- Icône alignée à gauche -->
-              <div class="text-left">
-                <p style="font-size: 1.5rem;">🏃</p>
+              <div class="icon text-left">
+                <p style="font-size: 1.3rem;">🏃</p>
               </div>
               <!-- Date et étoiles alignées au centre -->
               <div class="text-center">
@@ -92,6 +92,7 @@
                   <% end %>
                 </div>
               </div>
+            </div>
             </div>
 
 
@@ -145,15 +146,15 @@
 <!-- Modal for Editing Profile -->
 <div class="modal-recap">
   <div class="modal fade" style="" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-    <div class="modal-dialog text-info">
+    <div class="modal-dialog text-dark">
       <div class="modal-content" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-radius: 12px 12px 0 0;">
+        <div class="modal-header" style="border-bottom: 1px solid; border-radius: 12px 12px 0 0;">
           <h3 class="modal-title" id="editProfileModalLabel" style="">Modifier les informations de profil</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" style="">
           <%= form_with(model: @user, url: program_path(@program), method: :patch, local: true) do |f| %>
-            <div class="mb-3 text-info">
+            <div class="mb-3 text-dark">
               <%= f.label :first_name, "Prénom: " %>
               <%= f.text_field :first_name, class: "form-control", style: "" %>
             </div>
@@ -181,9 +182,9 @@
 </div>
 <!-- Modal for Editing Objective -->
 <div class="modal fade" id="editObjectiveModal" tabindex="-1" aria-labelledby="editObjectiveModalLabel" aria-hidden="true">
-  <div class="modal-dialog text-info">
+  <div class="modal-dialog text-dark">
     <div class="modal-content" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-radius: 12px 12px 0 0;">
+        <div class="modal-header" style="border-bottom: 1px solid; border-radius: 12px 12px 0 0;">
         <h3 class="modal-title" id="editProfileModalLabel" style="">Modifier les informations d'objectif</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
