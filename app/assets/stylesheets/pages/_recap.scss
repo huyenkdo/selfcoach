@@ -1,9 +1,20 @@
+.container-recap{
+  // margin: 15px;
+  padding: 20px;
+  padding-bottom: 15px;
+}
+
 body {
   color: white;
   /* Ajustez la couleur du texte pour être lisible */
   font-size: 16px;
 }
-
+.start-background{
+  background-attachment: fixed;
+  overflow: auto;
+  min-height: 100vh;
+  padding: 15px;
+}
 .card {
   // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
   padding: 15px; /* Ajoute un padding autour du contenu */
@@ -13,19 +24,13 @@ body {
 .card-body {
   padding: 10px; /* Réduit le padding dans le corps de la carte */
 }
+.date-icon {
+  margin-right: 20px;
+}
 
-// h5.card-title {
-//   font-weight: bold;
-//   margin-bottom: 10px;
-// }
-
-// p.mb-1 {
-//   background-color: #f4a460; /* Couleur de fond similaire à celle dans l'image */
-//   color: white; /* Texte blanc pour contraster */
-//   padding: 5px 10px; /* Ajoute du padding pour le texte */
-//   border-radius: 5px; /* Ajoute des coins arrondis au texte */
-// }
-
+.date-icon .icon {
+  margin-right: 10px;
+}
 
 .modal-recap{
   border-radius: 20px;
