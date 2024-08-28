@@ -99,7 +99,14 @@
             <!-- Run details -->
             <div class="col p-3 text-dark" style="border-radius: 10px; background-color: #FFE4D0;">
               <p class="mb-1" style="font-weight: bold; background-color: #FFE4D0;">Échauffement - 20 min </p>
-              <p class="mb-1"><%= session.run.kind %> - <%= session.run.run_interval_km %></p>
+              <p class="mb-1"> <%= session.run.kind %>
+                <% if session.run.kind == "Interval" %>
+                - <%= ((session.run.run_interval_km * session.run.run_interval_nbr) + (session.run.rest_interval_km * (session.run.run_interval_nbr - 1))).round(2) %> km
+              <% elsif session.run.kind == "Long" || session.run.kind == "Easy" || session.run.kind == "Tempo"%>
+                - <%= (session.run.run_interval_km * session.run.run_interval_nbr).round(2) %> km
+              <% end %></p>
+              <p>
+              </p>
             </div>
           </div>
         </div>
