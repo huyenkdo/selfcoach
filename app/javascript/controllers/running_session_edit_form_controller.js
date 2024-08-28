@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="running-session-edit-form"
 export default class extends Controller {
   static targets = [
-    "freeOrNot", "kind", "intervalFields", "runIntervalKm", "runIntervalTime", "restIntervalTime", "runIntervalNbr"
+    "freeOrNot", "kind", "intervalFields", "runIntervalKm", "runIntervalTime", "restIntervalTime", "runIntervalNbr", "kindInput", "totalRunTime", "restIntervalTimeInput", "runIntervalNbrInput"
   ]
 
   static values = {
@@ -13,14 +13,14 @@ export default class extends Controller {
   }
 
   toggleFields() {
-    if (this.kindTarget.value === 'Interval') {
+    if (this.kindInputTarget.value === 'Interval') {
       this.intervalFieldsTarget.style.display = 'block'
-      this.restIntervalTimeTarget.parentNode.classList.remove('d-none')
-      this.runIntervalNbrTarget.parentNode.classList.remove('d-none')
+      this.restIntervalTimeTarget.classList.remove('d-none')
+      this.runIntervalNbrTarget.classList.remove('d-none')
     } else {
       this.intervalFieldsTarget.style.display = 'block'
-      this.restIntervalTimeTarget.parentNode.classList.add('d-none')
-      this.runIntervalNbrTarget.parentNode.classList.add('d-none')
+      this.restIntervalTimeTarget.classList.add('d-none')
+      this.runIntervalNbrTarget.classList.add('d-none')
     }
   }
 
@@ -28,13 +28,14 @@ export default class extends Controller {
     const runIntervalPace = parseFloat(this.paceValue);
     const runIntervalTime = parseFloat(this.timeValue);
     const kmValue = parseFloat(this.runIntervalKmTarget.value)
-    console.log(kmValue)
 
     if (!isNaN(kmValue)) {
       this.runIntervalTimeTarget.value = (kmValue * runIntervalPace).toFixed(2)
     } else {
       this.runIntervalTimeTarget.value = runIntervalTime
     }
+
+    this.totalRunTimeTarget.innerHTML = "Durée totale : " + this.runIntervalTimeTarget.value + " mins"
   }
 
   updateRunIntervalKm() {
@@ -47,11 +48,19 @@ export default class extends Controller {
     } else {
       this.runIntervalKmTarget.value = runIntervalKm
     }
+
+    this.totalRunTimeTarget.innerHTML = "Durée totale : " + this.runIntervalTimeTarget.value + " mins"
+  }
+
+  updateTotalTime() {
+    const totalTime = (this.runIntervalTimeTarget.value * this.runIntervalNbrInputTarget.value) + (this.restIntervalTimeInputTarget.value * (this.runIntervalNbrInputTarget.value - 1))
+    this.totalRunTimeTarget.innerHTML = "Durée totale : " + parseFloat(totalTime).toFixed(2) + " mins"
   }
 
   freeOrNotChanged() {
     this.kindTarget.classList.toggle('d-none')
     this.intervalFieldsTarget.classList.toggle('d-none')
+    this.totalRunTimeTarget.classList.toggle('d-none')
   }
 
   kindChanged() {
