@@ -13,11 +13,11 @@ body {
   background-attachment: fixed;
   overflow: auto;
   min-height: 100vh;
-  padding: 15px;
+  padding: 10px;
 }
 .card {
   // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
-  padding: 15px; /* Ajoute un padding autour du contenu */
+  padding: 10px; /* Ajoute un padding autour du contenu */
   border-radius: 10px; /* Ajoute des coins arrondis */
 }
 
@@ -35,4 +35,3 @@ body {
 .modal-recap{
   border-radius: 20px;
 }
-
