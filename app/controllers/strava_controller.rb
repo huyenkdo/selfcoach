@@ -63,7 +63,8 @@ class StravaController < ApplicationController
         run.update!(
           real_total_km_ran: (activity['distance']/1000).round(2),
           real_total_time_ran: (activity['moving_time'] / 60).round(2),
-          real_avg_pace_ran: (60 / (activity['average_speed'] * 3.6)).round(2)
+          real_avg_pace_ran: (60 / (activity['average_speed'] * 3.6)).round(2),
+          status: "completed"
         )
       end
     end
