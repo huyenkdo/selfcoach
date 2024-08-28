@@ -49,7 +49,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_094947) do
     t.integer "run_interval_nbr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date"
     t.float "real_total_km_ran"
     t.float "real_total_time_ran"
     t.float "real_avg_pace_ran"
