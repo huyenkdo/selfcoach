@@ -14,63 +14,64 @@
     </div>
   </div>
 
-  <div class="day-run-container">
-    <div class="info-item container-fluid d-flex align-items-center justify-content-between">
-      <p class="run-session-date"><%= @run_session.date.strftime("%A %d %B") %></p>
-      <div class="info-item-star d-flex">
-        <% @run_star.times do %>
+<div class="day-run-container">
+  <div class="info-item container-fluid d-flex align-items-center justify-content-between">
+    <p class="run-session-date"><%= @run_session.date.strftime("%A %d %B") %></p>
+    <div class="info-item-star d-flex">
+      <% @run_star.times do %>
         <p class="star-notation">★</p>
-        <% end %>
-      </div>
-    </div>
-    <div class="info-item">
-      <div class="block-seance container-fluid d-flex align-items-center">
-        <p>Echauffement </p>
-        <p> 20 min </p>
-        <p>5:55/min/km</p>
-      </div>
-      <% if @run.kind == "interval run" %>
-        <div class="block-seance container-fluid d-flex align-items-center">
-          <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
-          <p><%= @session_details[:interval_pace] %>/min/km</p>
-        </div>
-      <% elsif @run.kind == "easy run" || @run.kind == "long run" %>
-        <div class="block-seance container-fluid d-flex align-items-center">
-          <p><%= @session_details[:distance] %> km</p>
-          <p><%= @session_details[:pace] %>/min/km</p>
-        </div>
       <% end %>
     </div>
   </div>
-
-  <div class="next-week-calendar container-fluid d-flex justify-content-between">
-    <% (Date.current..(Date.current + 6.days)).each do |date| %>
-      <turbo-frame id="<%= date.to_s %>">
-        <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
-          <div class="emoji-card-day container-fluid d-flex align-items-center justify-content-between">
-            <h1>
-              <% session = @next_week_sessions.find { |s| s.date == date } %>
-              <% if session %>
-                🏃
-              <% else %>
-                😴
-              <% end %>
-            </h1>
-            <h4> <%= date.strftime("%A %d") %> </h4>
-          </div>
-          <div class="kind-time-card">
-            <% if session %>
-              <p><%= session.run.kind.capitalize %></p>
-              <h2><%= session.run.formatted_time(session.run.total_time) %></h2>
-            <% else %>
-              <p>Repos</p>
-              <h2></h2>
-            <% end %>
-          </div>
-        </div>
-      </turbo-frame>
+  <div class="info-item">
+    <div class="block-seance container-fluid d-flex align-items-center">
+      <p>Echauffement </p>
+      <p> <%= @warmup_time %> min </p>
+      <p> <%= @run.warmup_pace %>/min/km</p>
+    </div>
+    <% if @run.kind == "Interval" %>
+      <div class="block-seance container-fluid d-flex align-items-center">
+        <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
+        <p><%= @session_details[:interval_pace] %>/min/km</p>
+      </div>
+    <% elsif @run.kind == "Easy" || @run.kind == "Long" %>
+      <div class="block-seance container-fluid d-flex align-items-center">
+        <p><%= @session_details[:distance] %> km</p>
+        <p><%= @session_details[:pace] %>/min/km</p>
+      </div>
     <% end %>
   </div>
+</div>
+
+<div class="next-week-calendar container-fluid d-flex justify-content-between">
+  <% (Date.current..(Date.current + 6.days)).each do |date| %>
+    <turbo-frame id="<%= date.to_s %>">
+      <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
+        <div class="emoji-card-day container-fluid d-flex align-items-center justify-content-between">
+          <h1>
+            <% session = @next_week_sessions.find { |s| s.date == date } %>
+            <% if session %>
+              🏃
+            <% else %>
+              😴
+            <% end %>
+          </h1>
+          <h4> <%= date.strftime("%A %d") %> </h4>
+        </div>
+        <div class="kind-time-card">
+          <% if session %>
+            <p><%= session.run.kind.capitalize %></p>
+            <h2><%= session.run.formatted_time(session.run.total_time) %></h2>
+          <% else %>
+            <p>Repos</p>
+            <h2></h2>
+          <% end %>
+        </div>
+      </div>
+    </turbo-frame>
+  <% end %>
+</div>
+
 
   <div class="data-home-page container-fluid d-flex flex-column">
     <h1> 📊 Journal d'entrainement </h1>
@@ -92,6 +93,25 @@
       <div class="container-nbr-run-this-week">
         <h3> <%= @formatted_total_time_this_week %> </h3>
         <p> couru cette semaine </p>
+      </div>
+    </div>
+    <div class="container-data-3">
+      <h1>Dernière course</h1>
+      <div class="container-data-3-infos container-fluid d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <p class="duration-data-4"> 0 </p>
+          <p class="time-duration-data-4"> km </p>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="time-data-3 mr-3">
+            <p class="duration-data-3 mb-0">Durée</p>
+            <p class="time-duration-data-3"><%= @run.formatted_time(@real_total_time_ran) %></p>
+          </div>
+          <div>
+            <p class="duration-data-3 mb-0">Pace</p>
+            <p class="time-duration-data-3"> 0 min / Km </p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="container-data-3">
