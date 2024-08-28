@@ -1,9 +1,20 @@
+.container-recap{
+  // margin: 15px;
+  padding: 20px;
+  padding-bottom: 15px;
+}
+
 body {
   color: white;
   /* Ajustez la couleur du texte pour être lisible */
   font-size: 16px;
 }
-
+.start-background{
+  background-attachment: fixed;
+  overflow: auto;
+  min-height: 100vh;
+  padding: 15px;
+}
 .card {
   // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
   padding: 15px; /* Ajoute un padding autour du contenu */
