@@ -1,6 +1,12 @@
+.container-recap .card, .container .card {
+  max-width: 100%;
+  width: 100%;  /* S'assure que toutes les cartes utilisent 100% de la largeur disponible */
+  box-sizing: border-box;
+}
+
 .container-recap{
   // margin: 15px;
-  padding: 20px;
+  padding: 10px;
   padding-bottom: 15px;
 }
 
@@ -13,12 +19,15 @@ body {
   background-attachment: fixed;
   overflow: auto;
   min-height: 100vh;
-  padding: 10px;
+  // padding: 10px;
 }
 .card {
   // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
   padding: 10px; /* Ajoute un padding autour du contenu */
-  border-radius: 10px; /* Ajoute des coins arrondis */
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  // margin: 15px;
 }
 
 .card-body {
