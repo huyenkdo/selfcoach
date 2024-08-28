@@ -1,154 +1,198 @@
 <!-- Mon Profil Section -->
-<div class="container mt-5 my-5 p-4 mrecap_container" >
-  <div class="row">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-      <h3 class="text-info" style="font-style: italic;">Mon profil</h3>
-      <!-- Bouton d'édition pour Mon profil -->
-      <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="border-color: #ff5a00;">
-        <i class="fa-regular fa-pen-to-square" style="color: #ff5a00;"></i>
-      </button>
-    </div>
-    <div class="col-12">
-      <div class="p-3" style="background-color: #fffdd0; color: #333; border-radius: 5px;">
-        <p><strong>Prénom :</strong> <%= @user.first_name %></p>
-        <p><strong>Âge :</strong> <%= @user.age %></p>
-        <p><strong>Poids :</strong> <%= @user.weight %> kg</p>
-        <p><strong>VMA :</strong> <%= @user.vma %> km/h</p>
+<div class="start-background">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2 class="text-uppercase fw-bold" style="color: #ff5a00;">Recap</h2>
       </div>
     </div>
-  </div>
-
-  <!-- Mon Objectif Section -->
-  <div class="row mt-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-      <h3 class="text-info" style="font-style: italic;">Mon objectif</h3>
-      <!-- Bouton d'édition pour Mon objectif -->
-      <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editObjectiveModal" style="border-color: #ff5a00;">
-        <i class="fa-regular fa-pen-to-square" style="color: #ff5a00;"></i>
-      </button>
-    </div>
-    <div class="col-12">
-      <div class="p-3" style="background-color: #fffdd0; color: #333; border-radius: 5px;">
-        <p><strong>Type de course :</strong> Semi-Marathon</p>
-        <p><strong>Date :</strong> <%= @program.race_date.strftime("%d/%m/%Y") %></p>
-        <p><strong>Objectif :</strong> <%= @program.objective_time %> min</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-4">
-    <div class="col-12">
-      <h3 class="text-info" style="color: #251672; font-style: italic;">Ma semaine type</h3>
-
-      <% @sessions.each do |session| %>
-        <div class="card mt-3" style="background-color: #f5f5dc; border-radius: 5px; padding: 10px;">
-          <div class="card-body p-0">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title" style="margin: 0; font-weight: bold;">
-                <%= session.date.strftime("%A") %>
-              </h5>
-              <span style="font-size: 0.9rem; color: #808080;">
-                <% if session.run.run_interval_time %>
-                  <%= session.run.run_interval_time * session.run.run_interval_nbr %>min
-                <% else %>
-                  <%= session.run.run_interval_km %>km
-                <% end %>
-              </span>
-            </div>
-            <div class="mt-2">
-              <div class="mb-1" style="background-color: #ffcc99; color: #000; padding: 5px 10px; border-radius: 5px;">
-                Échauffement - 20min - 5:55km
+      <div class="row justify-content-center">
+        <div class="col-10">
+           <!-- Bouton d'édition pour Mon Profil -->
+          <div class="card text-white bg-info mb-3" style="border-radius: 15px;">
+            <div class="card-body">
+           <div class="d-flex justify-content-between">
+              <h5 class="card-title text-center">Mon profil</h5>
+        <button class="btn btn-outline-secondary btn-sm float-end mb-4" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+          <i class="fa-solid fa-gear" style="font-size:1.2rem; color:white;"></i>
+        </button>
+        </div>
+              <p class="card-text text-center">
+                <strong><%= @user.first_name %> - <%= @user.age %> ans</strong><br>
+                </p>
+                <p class="card-text text-center">
+                <div class="row text-center">
+                <div class="col">
+                  <p class="mb-0">Poids</p>
+                  <p class="fw-bold"> <%= @user.weight %> kg</p>
+                </div>
+                <div class="col">
+                  <p class="mb-0">VMA</p>
+                  <p class="fw-bold"><%= @user.vma %></p>
+                </div>
               </div>
-              <div class="mb-1" style="background-color: #f4a460; color: #000; padding: 5px 10px; border-radius: 5px;">
-                10 × 400m - 4:00km
-              </div>
-            </div>
-            <p class="mt-3" style="font-style: italic; color: #555;">Difficulté</p>
-            <div class="d-flex justify-content-center">
-              <% session.run.difficulty.times do %>
-                <span style="color: #ff5a00; font-size: 2rem; margin-right: 5px;">★</span>
-              <% end %>
-              <% (5 - session.run.difficulty).times do %>
-                <span style="color: #d3d3d3; font-size: 2rem; margin-right: 5px;">★</span>
-              <% end %>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
-  </div>
- <div class="row mt-4">
-      <div class="col-12 text-center">
-        <p style="font-size: 1.5rem; font-weight: bold; color: black;"><strong>Total temps :</strong> 4h25</p>
-        <p style="font-size: 1.5rem; font-weight: bold;color: black;"><strong>Nombre de séances :</strong> 4</p>
-        <%= link_to 'Let\'s Run', home_path, class: 'btn btn-primary text-white', style: 'background-color: #005792; border-radius: 20px; padding: 10px 20px; font-size: 1.2rem;', role: 'button' %>
+      </div>
 
+    <!-- Mon Objectif Section -->
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="d-flex justify-content-between mt-3">
+        <h4 class="text-dark fw-bold">Mon objectif</h4>
+        <!-- Bouton d'édition pour Mon objectif -->
+        <button class="btn btn-outline-secondary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editObjectiveModal">
+          <i class="fa-regular fa-pen-to-square" style="color: black"></i>
+        </button>
+        </div>
+        <div class="card text-center mb-3" style="border-radius: 15px;">
+          <div class="card-body">
+            <p class="card-text">
+              <strong>Semi-Marathon le <%= @program.race_date.strftime("%d/%m/%Y") %></strong><br>
+              <%= @program.objective_time %> min
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+
+
+<!-- Ma semaine type Section -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-10 text-center">
+      <h3 class="text-primary" style="font-weight: bold;">Ma semaine type</h3>
+    </div>
+  </div>
+
+  <% @sessions.each do |session| %>
+    <div class="row justify-content-center mb-3">
+      <div class="col-10">
+        <div class="card shadow-sm">
+          <div class="card-body p-3">
+            <!-- Icon and Day -->
+
+             <div class="d-flex align-items-center justify-content-center mb-2 flex-grow-1">
+              <!-- Icône alignée à gauche -->
+              <div class="text-left">
+                <p style="font-size: 1.5rem;">🏃</p>
+              </div>
+              <!-- Date et étoiles alignées au centre -->
+              <div class="text-center">
+                <h5 class="card-title mb-1" style="font-weight: bold;">
+                  <%= session.date.strftime("%A") %>
+                </h5>
+                <!-- Placer les étoiles en dessous de la date -->
+                <div>
+                  <% session.run.difficulty.times do %>
+                    <span class="text-warning">★</span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Run details -->
+            <div class="col p-3 text-dark" style="border-radius: 10px; background-color: #FFE4D0;">
+              <p class="mb-1" style="font-weight: bold; background-color: #FFE4D0;">Échauffement - 20 min </p>
+              <p class="mb-1"><%= session.run.kind %> - <%= session.run.run_interval_km %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Total time and session count -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-10">
+      <div class="card shadow-sm">
+        <div class="card-body d-flex justify-content-between align-items-center p-3">
+          <div>
+            <p class="mb-0"><strong>Total parcouru:  </strong></p>
+            <p class="mb-0"><%= @km_this_week%> km </p>
+          </div>
+          <div>
+            <p class="mb-0"><strong>Nombre de séances: </strong></p>
+            <p class="mb-0"><%= @sessions.count %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="row justify-content-center mt-3">
+    <div class="col-10 text-center">
+      <%= link_to 'Let\'s Run', home_path, class: 'btn btn-info', style: 'border-radius: 25px; padding: 10px 40px; font-size: 1.2rem;' %>
+    </div>
+  </div>
 </div>
+
 
 
 <!-- Modal for Editing Profile -->
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="editProfileModalLabel" style="color: black;">Modifier les informations de profil</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" style="color: black;">
-        <p>Utilisez le formulaire ci-dessous pour mettre à jour vos informations personnelles.</p>
-        <hr>
-        <%= form_with(model: @user, url: program_path(@program), method: :patch, local: true) do |f| %>
-          <div class="mb-3">
-            <%= f.label :first_name, "Prénom", style: "color: black;" %>
-            <%= f.text_field :first_name, class: "form-control", style: "color: black;" %>
-          </div>
-          <div class="mb-3">
-            <%= f.label :age, "Âge", style: "color: black;" %>
-            <%= f.number_field :age, class: "form-control", style: "color: black;" %>
-          </div>
-          <div class="mb-3">
-            <%= f.label :weight, "Poids (kg)", style: "color: black;" %>
-            <%= f.number_field :weight, class: "form-control", style: "color: black;" %>
-          </div>
-          <div class="mb-3">
-            <%= f.label :vma, "VMA (km/h)", style: "color: black;" %>
-            <%= f.number_field :vma, class: "form-control", style: "color: black;" %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <%= f.submit "Enregistrer", class: "btn btn-primary" %>
-          </div>
-        <% end %>
+<div class="modal-recap">
+  <div class="modal fade" style="" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog text-info">
+      <div class="modal-content" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-radius: 12px 12px 0 0;">
+          <h3 class="modal-title" id="editProfileModalLabel" style="">Modifier les informations de profil</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="">
+          <%= form_with(model: @user, url: program_path(@program), method: :patch, local: true) do |f| %>
+            <div class="mb-3 text-info">
+              <%= f.label :first_name, "Prénom: " %>
+              <%= f.text_field :first_name, class: "form-control", style: "" %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :age, "Âge: ", style: "" %>
+              <%= f.number_field :age, class: "form-control", style: "" %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :weight, "Poids (kg): ", style: "" %>
+              <%= f.number_field :weight, class: "form-control", style: "" %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :vma, "VMA (km/h): ", style: "" %>
+              <%= f.number_field :vma, class: "form-control", style: "" %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <%= f.submit "Enregistrer", class: "btn btn-primary", style: "color: white" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 <!-- Modal for Editing Objective -->
 <div class="modal fade" id="editObjectiveModal" tabindex="-1" aria-labelledby="editObjectiveModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="editProfileModalLabel" style="color: black;">Modifier les informations d'objectif</h3>
+  <div class="modal-dialog text-info">
+    <div class="modal-content" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-radius: 12px 12px 0 0;">
+        <h3 class="modal-title" id="editProfileModalLabel" style="">Modifier les informations d'objectif</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" style="color: black;">
-        <p>Utilisez le formulaire ci-dessous pour mettre à jour vos objectifs.</p>
-        <hr>
+      <div class="modal-body" style="">
         <%= form_with(model: @program, url: program_path(@program), method: :patch, local: true) do |f| %>
           <div class="mb-3">
-            <%= f.label :race_date, "Date de la course", style: "color: black;" %>
-            <%= f.date_field :race_date, class: "form-control", style: "color: black;" %>
+            <%= f.label :race_date, "Date de la course", style: "" %>
+            <%= f.date_field :race_date, class: "form-control", style: "" %>
           </div>
           <div class="mb-3">
-            <%= f.label :objective_time, "Objectif (min)", style: "color: black;" %>
-            <%= f.number_field :objective_time, class: "form-control", style: "color: black;" %>
+            <%= f.label :objective_time, "Objectif (min)", style: "" %>
+            <%= f.number_field :objective_time, class: "form-control", style: "" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+            <%= f.submit "Enregistrer", class: "btn btn-primary", style: "color: white" %>
           </div>
         <% end %>
       </div>

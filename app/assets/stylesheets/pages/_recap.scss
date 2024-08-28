@@ -5,7 +5,7 @@ body {
 }
 
 .card {
-  margin-bottom: 15px; /* Ajuste la marge entre les cartes */
+  // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
   padding: 15px; /* Ajoute un padding autour du contenu */
   border-radius: 10px; /* Ajoute des coins arrondis */
 }
@@ -14,32 +14,19 @@ body {
   padding: 10px; /* Réduit le padding dans le corps de la carte */
 }
 
-h5.card-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-p.mb-1 {
-  background-color: #f4a460; /* Couleur de fond similaire à celle dans l'image */
-  color: white; /* Texte blanc pour contraster */
-  padding: 5px 10px; /* Ajoute du padding pour le texte */
-  border-radius: 5px; /* Ajoute des coins arrondis au texte */
-}
-
-p.mt-2 {
-  margin-top: 10px; /* Ajuste la marge supérieure */
-}
-
-.text-warning {
-  color: #f39c12 !important; /* Ajuste la couleur des étoiles pour la difficulté */
-}
-
-.text-muted {
-  color: #ccc !important; /* Ajuste la couleur des étoiles non sélectionnées */
-}
-
-// .text-primary {
-//   color: #251672;
+// h5.card-title {
 //   font-weight: bold;
-//   font-style: italic;
+//   margin-bottom: 10px;
 // }
+
+// p.mb-1 {
+//   background-color: #f4a460; /* Couleur de fond similaire à celle dans l'image */
+//   color: white; /* Texte blanc pour contraster */
+//   padding: 5px 10px; /* Ajoute du padding pour le texte */
+//   border-radius: 5px; /* Ajoute des coins arrondis au texte */
+// }
+
+
+.modal-recap{
+  border-radius: 20px;
+}
