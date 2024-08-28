@@ -13,6 +13,8 @@ class RunningSessionsController < ApplicationController
     @run_interval_nbr = run.run_interval_nbr
     @run_interval_pace = run.run_interval_pace
     @run_interval_time = run.run_interval_time
+    @date = @running_session.date
+    @program = @running_session.program
   end
 
   def update

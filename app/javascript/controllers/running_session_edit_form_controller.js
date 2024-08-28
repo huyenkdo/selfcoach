@@ -6,33 +6,52 @@ export default class extends Controller {
     "freeOrNot", "kind", "intervalFields", "runIntervalKm", "runIntervalTime", "restIntervalTime", "runIntervalNbr"
   ]
 
+  static values = {
+    pace: String,
+    km: String,
+    time: String
+  }
+
   toggleFields() {
-    if (!this.freeOrNotTarget.checked) {
-      this.intervalFieldsTarget.classList = 'd-none'
+    if (this.kindTarget.value === 'Interval') {
+      this.intervalFieldsTarget.style.display = 'block'
+      this.restIntervalTimeTarget.parentNode.classList.remove('d-none')
+      this.runIntervalNbrTarget.parentNode.classList.remove('d-none')
     } else {
-      if (this.kindTarget.value === 'Interval') {
-        this.intervalFieldsTarget.style.display = 'block'
-        this.restIntervalTimeTarget.parentNode.style.display = ''
-        this.runIntervalNbrTarget.parentNode.style.display = ''
-      } else {
-        this.intervalFieldsTarget.style.display = 'block'
-        this.restIntervalTimeTarget.parentNode.style.display = 'none'
-        this.runIntervalNbrTarget.parentNode.style.display = 'none'
-      }
+      this.intervalFieldsTarget.style.display = 'block'
+      this.restIntervalTimeTarget.parentNode.classList.add('d-none')
+      this.runIntervalNbrTarget.parentNode.classList.add('d-none')
     }
   }
 
   updateRunIntervalTime() {
-    const runIntervalPace = 6; // Assume 6 mins per km
+    const runIntervalPace = parseFloat(this.paceValue);
+    const runIntervalTime = parseFloat(this.timeValue);
     const kmValue = parseFloat(this.runIntervalKmTarget.value)
+    console.log(kmValue)
 
     if (!isNaN(kmValue)) {
       this.runIntervalTimeTarget.value = (kmValue * runIntervalPace).toFixed(2)
+    } else {
+      this.runIntervalTimeTarget.value = runIntervalTime
+    }
+  }
+
+  updateRunIntervalKm() {
+    const runIntervalPace = parseFloat(this.paceValue);
+    const runIntervalKm = parseFloat(this.kmValue);
+    const timeValue = parseFloat(this.runIntervalTimeTarget.value)
+
+    if (!isNaN(timeValue)) {
+      this.runIntervalKmTarget.value = (timeValue / runIntervalPace).toFixed(2)
+    } else {
+      this.runIntervalKmTarget.value = runIntervalKm
     }
   }
 
   freeOrNotChanged() {
-    this.toggleFields()
+    this.kindTarget.classList.toggle('d-none')
+    this.intervalFieldsTarget.classList.toggle('d-none')
   }
 
   kindChanged() {
