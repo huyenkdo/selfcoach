@@ -43,8 +43,8 @@
         <div class="d-flex justify-content-between mt-3">
         <h4 class="text-dark fw-bold">Mon objectif</h4>
         <!-- Bouton d'édition pour Mon objectif -->
-        <button class="btn btn-outline-secondary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editObjectiveModal">
-          <i class="fa-regular fa-pen-to-square" style="color: black"></i>
+        <button class="btn btn-outline-secondary btn-sm float-end mb-2" data-bs-toggle="modal" data-bs-target="#editObjectiveModal">
+          <i class="fa-solid fa-pen-to-square" style="color: black"></i>
         </button>
         </div>
         <div class="card text-center mb-3" style="border-radius: 15px;">
@@ -65,7 +65,7 @@
   <div class="container mt-3">
     <div class="row">
       <div class="col-10 text-center ">
-        <h3 class="text-primary" style="font-weight: bold;">Ma semaine type</h3>
+        <h3 class="text-primary " style="font-weight: bold;">Ma semaine type</h3>
       </div>
     </div>
 
@@ -84,7 +84,7 @@
                 <!-- Date et étoiles alignées au centre -->
                 <div class="text-center">
                   <h5 class="card-title mb-1" style="font-weight: bold;">
-                    <%= session.date.strftime("%A") %>
+                    <%= t('date.day_names')[session.date.wday]%>
                   </h5>
                   <!-- Placer les étoiles en dessous de la date -->
                   <div>
