@@ -49,9 +49,9 @@ class PagesController < ApplicationController
     @km_this_week = @km_this_week.round(2)
     @formatted_total_time_this_week = @run.formatted_time(@total_time_this_week)
 
-    @real_total_km_ran = @run.real_total_km_ran
-    @real_total_time_ran = @run.real_total_time_ran
-    @real_avg_pace_ran = @run.real_avg_pace_ran
+    # @real_total_km_ran = @run.real_total_km_ran
+    # @real_total_time_ran = @run.real_total_time_ran
+    # @real_avg_pace_ran = @run.real_avg_pace_ran
   end
 
   def recap
