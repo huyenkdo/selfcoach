@@ -1,11 +1,22 @@
+.container-recap{
+  // margin: 15px;
+  padding: 20px;
+  padding-bottom: 15px;
+}
+
 body {
   color: white;
   /* Ajustez la couleur du texte pour être lisible */
   font-size: 16px;
 }
-
+.start-background{
+  background-attachment: fixed;
+  overflow: auto;
+  min-height: 100vh;
+  padding: 15px;
+}
 .card {
-  margin-bottom: 15px; /* Ajuste la marge entre les cartes */
+  // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
   padding: 15px; /* Ajoute un padding autour du contenu */
   border-radius: 10px; /* Ajoute des coins arrondis */
 }
@@ -13,33 +24,14 @@ body {
 .card-body {
   padding: 10px; /* Réduit le padding dans le corps de la carte */
 }
-
-h5.card-title {
-  font-weight: bold;
-  margin-bottom: 10px;
+.date-icon {
+  margin-right: 20px;
 }
 
-p.mb-1 {
-  background-color: #f4a460; /* Couleur de fond similaire à celle dans l'image */
-  color: white; /* Texte blanc pour contraster */
-  padding: 5px 10px; /* Ajoute du padding pour le texte */
-  border-radius: 5px; /* Ajoute des coins arrondis au texte */
+.date-icon .icon {
+  margin-right: 10px;
 }
 
-p.mt-2 {
-  margin-top: 10px; /* Ajuste la marge supérieure */
+.modal-recap{
+  border-radius: 20px;
 }
-
-.text-warning {
-  color: #f39c12 !important; /* Ajuste la couleur des étoiles pour la difficulté */
-}
-
-.text-muted {
-  color: #ccc !important; /* Ajuste la couleur des étoiles non sélectionnées */
-}
-
-// .text-primary {
-//   color: #251672;
-//   font-weight: bold;
-//   font-style: italic;
-// }

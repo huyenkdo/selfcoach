@@ -1,32 +1,55 @@
-<h1>Sessions#edit</h1>
-<p>Find me in app/views/sessions/edit.html.erb</p>
-
-<!-- Edit Training Form Container -->
-<div class="container mt-5" style="max-width: 400px; background-color: #fffdd0; padding: 20px; border-radius: 10px;">
-
-  <!-- Page Title -->
-  <div class="row">
-    <div class="col-12 text-center">
-      <h2 style="color: #ff5a00; font-weight: bold;">Paramètres</h2>
+<div class="px-4" style="background-color: #F7F7F7">
+  <%= link_to "X", program_path(@program), class: "position-absolute text-info text-decoration-none fs-4", style: "top: 25px; right:25px" %>
+  <h1 class="fw-bold text-primary pt-4" style="font-size: xx-large">Paramètres</h1>
+  <div class="d-flex justify-content-center">
+    <div class="mb-2 text-info text-center mt-4">
+      <h2 class="fw-bold"><%= t('date.day_names')[@date.wday].upcase_first %></h2>
+      <h2 class="fw-bold border-bottom border-dark-subtle pb-4"><%= @date.to_fs(:rfc822) %></h2>
     </div>
   </div>
 
-   <%= form_with(model: @running_session, url: running_session_path(@running_session), method: :patch, local: true) do |f| %>
-          <%# <div class="mb-3">
-            <%= f.label :race_date, "Date de la course", style: "color: black;" %>
-            <%# <%= f.date_field :race_date, class: "form-control", style: "color: black;" %> %>
-          <%# </div> %> %>
-          <div class="mb-3">
-            <%= f.label :objective_time, "Objectif (min)", style: "color: black;" %>
-            <%= f.number_field :objective_time, class: "form-control", style: "color: black;" %>
-          </div>
-          <div class="mb-3">
-            <%= f.label :kind, "Type d'entrainement", style: "color: black;" %>
-            <%= f.checkbox :kind, class: "form-check-input", style: "color: black;" %>
-          </div>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+  <%= simple_form_for(@running_session, method: 'patch', html: { data: { controller: "running-session-edit-form", running_session_edit_form_pace_value: @run_interval_pace, running_session_edit_form_km_value: @run_interval_km, running_session_edit_form_time_value: @run_interval_time }, id:"form-running-session-edit" }) do |f| %>
+    <div class="row justify-content-around text-info mt-3">
+      <p class="col-9 fs-5">Dispo pour s'entrainer ?</p>
+      <div class="checkbox-wrapper-5 col-3">
+        <%= f.input :free_or_not, as: :boolean, label: false, input_html: { class:'check-5', checked: true, data: { action: "change->running-session-edit-form#freeOrNotChanged", running_session_edit_form_target: "freeOrNot"} }, wrapper_html: { class: 'check m-0' } %>
+      </div>
+    </div>
+    <p class="fs-5 text-info mb-2">Type de course ?</p>
+    <%= f.input :kind, as: :select, collection: ['Easy', 'Long', 'Interval', 'Tempo'], label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { action: "change->running-session-edit-form#kindChanged", running_session_edit_form_target: "kind" } }, wrapper_html: { class: 'flex-grow-1' }, selected: @kind %>
+    <div data-running-session-edit-form-target="intervalFields">
+      <div class="d-flex mb-2 align-items-baseline">
+        <p class="col-8 fs-5 text-info mb-2">Distance de course :</p>
+        <%= f.input :run_interval_km, label: false, placeholder: @run_interval_km.to_s, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { action: "input->running-session-edit-form#updateRunIntervalTime", running_session_edit_form_target: "runIntervalKm" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
+        <p class="fs-5 text-dark mb-2 ms-3 align-content-center col-1">km</p>
+      </div>
+      <div class="d-flex align-items-baseline">
+        <p class="fs-5 text-info mb-2 me-4">Temps de course :</p>
+        <%= f.input :run_interval_time, label: false, placeholder: @run_interval_time.to_s, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { action: "input->running-session-edit-form#updateRunIntervalKm", running_session_edit_form_target: "runIntervalTime" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
+        <p class="fs-5 text-dark mb-2 ms-3 align-content-center">mins</p>
+      </div>
+      <% if @kind == "Interval" %>
+        <div class="d-flex align-items-baseline">
+          <p class="col-8 fs-5 text-info mb-2 me-4">Distance de repos :</p>
+          <%= f.input :rest_interval_time, label: false, placeholder: @rest_interval_km, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "restIntervalTime" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
+          <p class="fs-5 text-dark mb-2 ms-3 align-content-center col-1">km</p>
+        </div>
+        <%= f.input :run_interval_nbr, label: false, placeholder: @run_interval_nbr, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "runIntervalNbr" } }, wrapper_html: { class: 'flex-grow-1' } %>
+      <% else %>
+        <%= f.input :rest_interval_time, label: false, placeholder: @rest_interval_km, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "restIntervalTime" } }, wrapper_html: { class: 'flex-grow-1 d-none' } %>
+        <%= f.input :run_interval_nbr, label: false, placeholder: @run_interval_nbr, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "runIntervalNbr" } }, wrapper_html: { class: 'flex-grow-1 d-none' } %>
+      <% end %>
+      <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
+        <%= link_to program_path(@program) do %>
+            <button class="calendar-btn"></button>
+          <% end %>
 
+        <%= f.submit ">", class: "go-btn", style: "font-size: xx-large;" %>
+
+        <%= link_to home_path do %>
+          <button class="profil-btn"></button>
         <% end %>
-
+        </div>
+      </div>
+  <% end %>
 </div>
