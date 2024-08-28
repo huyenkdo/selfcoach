@@ -201,7 +201,18 @@ class ProgramsController < ApplicationController
     @user = current_user
     @program = Program.find(params[:id])
     @sessions = @program.running_sessions.where(date: (Date.current.next_occurring(:monday))..Date.current.next_occurring(:monday) + 6)
-
+    @km_this_week = 0
+    RunningSession.joins(:run).where(date: (Date.current.next_occurring(:monday))..Date.current.next_occurring(:monday) + 6).each do |session|
+      case session.run.kind
+      when "Interval"
+        # Pour les courses intervalles, multiplier le temps d'un intervalle par le nombre de répétitions
+        @km_this_week += session.run.run_interval_km * session.run.run_interval_nbr
+      when "Easy", "Long", "Tempo"
+        # Pour les autres types de course, ajouter simplement le temps de la course
+        @km_this_week += session.run.run_interval_time
+      end
+    end
+    @km_this_week = @km_this_week.round(2)
   end
 
   private
