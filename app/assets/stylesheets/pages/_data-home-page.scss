@@ -89,7 +89,54 @@ progress {
 }
 
 .container-data-2 h3 {
+  color: #FF6B35;
   font-size: 19px;
   padding-top: 8px;
   font-weight: 600;
+}
+
+.container-data-3 {
+  background-color: white;
+  border-radius: 10px;
+  border: solid;
+  border-color: rgb(217, 214, 214);
+}
+
+.container-data-3 h1 {
+  color: #004E89;
+  font-size: 14px;
+  padding-top: 12px;
+  padding-left: 15px;
+  font-weight: 550;
+}
+
+.container-data-3-infos {
+  color: #004E89;
+  font-size: 14px;
+}
+
+.time-data-3 {
+  padding-right: 35px;
+}
+
+.duration-data-3 {
+  font-size: 12px;
+}
+
+.time-duration-data-3 {
+  font-size: 18px;
+  font-weight: 550;
+}
+
+.duration-data-4 {
+  padding-left: 23px;
+  padding-right: 10px;
+  font-size: 42px;
+  font-weight: 600;
+  color: #FF6B35;
+}
+
+.time-duration-data-4 {
+  padding-top: 13px;
+  font-size: 15px;
 }

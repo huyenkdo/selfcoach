@@ -7,15 +7,15 @@ class Run < ApplicationRecord
 
   def total_time
     case kind
-    when "interval run"
+    when "Interval" || "Tempo"
       run_time = run_interval_time || 0
       rest_time = rest_interval_time || 0
       intervals = run_interval_nbr || 1
       (run_time * intervals) + (rest_time * (intervals - 1))
-    when "easy run", "long run"
+    when "Easy" || "Long"
       run_interval_km * run_interval_pace
     else
-      0
+      10
     end
   end
 
@@ -27,9 +27,13 @@ class Run < ApplicationRecord
     end
   end
 
+  def warmup_pace
+    (run_interval_pace * 1.5).round(2)
+  end
+
   def session_details
     case kind
-    when "interval run"
+    when "Interval"
       {
         intervals: run_interval_nbr,
         interval_distance: run_interval_km,
@@ -37,7 +41,7 @@ class Run < ApplicationRecord
         rest_pace: rest_interval_pace,
         difficulty: difficulty
       }
-    when "easy run", "long run"
+    when "Easy", "Long run"
       {
         distance: run_interval_km,
         pace: run_interval_pace,
@@ -48,7 +52,10 @@ class Run < ApplicationRecord
     end
   end
 
+
   def formatted_time(time)
+    return "0 min" if time.nil?
+
     if time >= 60
       hours = time.to_i / 60
       minutes = time.to_i % 60
