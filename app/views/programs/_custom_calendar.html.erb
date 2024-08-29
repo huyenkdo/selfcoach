@@ -21,7 +21,7 @@
           <table class="table table-striped">
             <tbody>
               <tr>
-                <div class="next-week-calendar d-flex justify-content-between">
+                <div class="next-week-calendar d-flex justify-content-between pb-2">
                   <% week.each do |day| %>
                       <turbo-frame id="<%= day.to_s %>">
                         <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
