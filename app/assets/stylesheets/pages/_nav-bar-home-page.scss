@@ -22,6 +22,21 @@
   color: #004E89;
 }
 
+.calendar-btn.active {
+  position: relative;
+}
+
+.calendar-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: 9px;
+  width: 10px;
+  height: 10px;
+  background-color: #FF6B35;
+  border-radius: 50px;
+}
+
 .go-btn {
   background-color: #FF6B35;
   border: none;
@@ -47,4 +62,19 @@
   border: none;
   background-color: transparent;
   color: #004E89;
+}
+
+.profil-btn.active {
+  position: relative;
+}
+
+.profil-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: 12px;
+  width: 10px;
+  height: 10px;
+  background-color: #FF6B35;
+  border-radius: 50px;
 }
