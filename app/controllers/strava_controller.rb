@@ -60,11 +60,13 @@ class StravaController < ApplicationController
       running_session = RunningSession.find_by(date: activity_date)
       unless running_session.nil?
         run = running_session.run
+        running_session.udpdate!(
+          status: "completed"
+        )
         run.update!(
           real_total_km_ran: (activity['distance']/1000).round(2),
           real_total_time_ran: (activity['moving_time'] / 60).round(2),
-          real_avg_pace_ran: (60 / (activity['average_speed'] * 3.6)).round(2),
-          status: "completed"
+          real_avg_pace_ran: (60 / (activity['average_speed'] * 3.6)).round(2)
         )
       end
     end

@@ -8,7 +8,7 @@
       <%= f.input :first_name, label: false, input_html: { data: { toggle_target: "togglableInput1" }, class: "rounded-3", style: "background: #1a659e85; color: #061e41; --bs-form-valid-border-color: #4ecefe;" } %>
       <%= f.input :age, label: false, input_html: { data: { toggle_target: "togglableInput2" }, class: "d-none rounded-3", style: "background: #1a659e85; color: #061e41; --bs-form-valid-border-color: #4ecefe;" } %>
       <%= f.input :weight, label: false, input_html: { data: { toggle_target: "togglableInput3" }, class: "d-none rounded-3", style: "background: #1a659e85; color: #061e41; --bs-form-valid-border-color: #4ecefe;" } %>
-      <%= f.input :vma, label: false, input_html: { data: { toggle_target: "togglableInput4" }, class: "d-none rounded-3", style: "background: #1a659e85; color: #061e41; --bs-form-valid-border-color: #4ecefe;" } %>
+      <%= f.input :vma, label: false, placeholder: '(Optionel)', input_html: { data: { toggle_target: "togglableInput4" }, class: "d-none rounded-3", style: "background: #1a659e85; color: #061e41; --bs-form-valid-border-color: #4ecefe;" } %>
       <%= f.submit ">", data: { toggle_target: "togglableButton4" }, class: "btn btn-info rounded-pill mt-4 d-none fs-5", style: "width: 90px" %>
     <% end %>
     <button class="btn btn-info rounded-pill mt-4 fs-5" style="width: 90px" data-action="click->toggle#fireQuestion2" data-toggle-target="togglableButton1">&gt;</button>
