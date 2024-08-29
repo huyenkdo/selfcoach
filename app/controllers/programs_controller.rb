@@ -206,6 +206,9 @@ class ProgramsController < ApplicationController
         @km_this_week += (session.run.run_interval_km * session.run.run_interval_nbr)
     end
     @km_this_week = @km_this_week.round(2)
+   total_minutes = @program.objective_time
+   @hours = (total_minutes / 60).round(0)
+   @minutes = (total_minutes % 60).round(0)
   end
 
   private
