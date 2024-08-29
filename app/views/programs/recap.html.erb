@@ -1,10 +1,10 @@
 <!-- Mon Profil Section -->
 <div class="start-background">
 
-  <div class="container-recap mt-2">
+  <div class="container-recap mt-1">
     <div class="row justify-content-center">
       <div class="col-10">
-        <h2 class="text fw-bold m-1 mb-2" style="color: #ff5a00;">Recap</h2>
+        <h2 class="text fw-bold m-1 mb-2" style="color: #ff5a00;font-size:26px;">Recap</h2>
       </div>
     </div>
       <div class="row justify-content-center">
@@ -13,16 +13,16 @@
           <div class="card shadow-sm text-white bg-info mb-3" style="border-radius: 30px;">
             <div class="card-body">
            <div class="d-flex justify-content-between">
-              <h5 class="card-title text-center">Mon profil</h5>
+              <h5 class="card-title text-center" style="font-size:24px;">Mon profil</h5>
             <button class="btn btn-outline-secondary btn-sm float-end mb-2" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="border: none;">
               <i class="fa-solid fa-gear" style="font-size:1.2rem; color:white;"></i>
             </button>
          </div>
-              <p class="card-text text-center">
+              <p class="card-text text-center" style="font-size:22px;">
                 <strong><%= @user.first_name %> - <%= @user.age %> ans</strong><br>
                 </p>
                 <p class="card-text text-center">
-                <div class="row text-center">
+                <div class="row text-center" style="font-size:19px;">
                 <div class="col">
                   <p class="mb-0">Poids</p>
                   <p class="fw-bold"> <%= @user.weight %> kg</p>
@@ -41,7 +41,7 @@
     <!-- Mon Objectif Section -->
     <div class="row justify-content-center">
       <div class="col-10">
-        <div class="d-flex justify-content-between mt-3">
+        <div class="d-flex justify-content-between mt-2">
           <h4 class="text-dark fw-bold">Mon objectif</h4>
           <!-- Bouton d'édition pour Mon objectif -->
           <button class="btn btn-outline-secondary btn-sm float-end mb-2" data-bs-toggle="modal" data-bs-target="#editObjectiveModal" style="border: none;">
@@ -61,7 +61,7 @@
  </div>
 
   <!-- Ma semaine type Section -->
-  <div class="container mt-1">
+  <div class="container mt-0">
     <div class="row justify-content-center">
       <div class="col-10 text-left mb-2">
         <h3 class="text-dark" style="font-weight: bold;">Ma semaine type</h3>
@@ -86,7 +86,7 @@
 
                     <!-- Date et étoiles alignées au centre -->
                     <div class="text-center">
-                      <h5 class="card-title mb-1" style="font-weight: bold;">
+                      <h5 class="card-title mb-1" style="font-weight: bold; font-size:22px;">
                         <%= t('date.day_names')[session.date.wday] %>
                       </h5>
                       <!-- Placer les étoiles en dessous de la date -->
@@ -101,8 +101,8 @@
 
                 <!-- Run details -->
                 <div class="col p-3 text-dark" style="border-radius: 10px; background-color: #F7C59F;">
-                  <p class="mb-1" style="font-weight: bold; background-color: #F7C59F;">Échauffement - 20 min</p>
-                  <p class="mb-1">
+                  <p class="mb-1" style="background-color: #F7C59F;">Échauffement - 20 min</p>
+                  <p class="mb-1" style="font-size:17px; font-weight: bold; ">
                     <%= session.run.kind %>
                     <% if session.run.kind == "Interval" %>
                       - <%= ((session.run.run_interval_km * session.run.run_interval_nbr) + (session.run.rest_interval_km * (session.run.run_interval_nbr - 1))).round(2) %> km
@@ -124,12 +124,12 @@
         <div class="card shadow-sm">
           <div class="card-body d-flex justify-content-between align-items-center p-3">
             <div>
-              <p class="mb-0"><strong>Total parcouru:  </strong></p>
-              <p class="mb-0"><%= @km_this_week%> km </p>
+              <p class="mb-0" ><strong>Total parcouru:  </strong></p>
+              <p class="mb-0" style="font-size:17px;"><%= @km_this_week%> km </p>
             </div>
             <div>
               <p class="mb-0"><strong>Nbre de séances: </strong></p>
-              <p class="mb-0"><%= @sessions.count %> séances</p>
+              <p class="mb-0" style="font-size:17px;"><%= @sessions.count %> séances</p>
             </div>
           </div>
         </div>
