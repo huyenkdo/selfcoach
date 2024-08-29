@@ -47,8 +47,8 @@ class PagesController < ApplicationController
 
     @program.running_sessions.joins(:run).where(date: start_date_week..end_date_week, status: 'completed').each do |session|
       run = session.run
-      @km_this_week += run.run_interval_km * run.run_interval_nbr
-      @total_time_this_week += run.total_time
+      @km_this_week += run.real_total_km_ran
+      @total_time_this_week += run.real_total_time_ran
     end
     @km_this_week = @km_this_week.round(2)
     @formatted_total_time_this_week = @run.formatted_time(@total_time_this_week)
