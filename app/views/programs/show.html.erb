@@ -1,7 +1,7 @@
 <div data-controller="modal">
   <div style="background: #F5F1F1;">
     <div style="display: flex; justify-content: center;">
-      <h1 style="font-size: 40px; font-weight: bold; color: #FF6B35; padding-top: 54px; padding-left: 36px;">Programme</h1>
+      <h1 style="font-size: 40px; font-weight: bold; color: #FF6B35; padding-top: 54px; padding-left: 6px;">Programme</h1>
     </div>
 
     <%= custom_calendar(start_date: @start_date, events: @running_sessions, attribute: :date) do |date, running_sessions| %>
@@ -32,15 +32,7 @@
   <div data-modal-target="modalElement" class="modal fade text-black" id="running-session-modal" tabindex="-1" aria-labelledby="running-session-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fw-bold text-bolb text-primary" id="running-session-modal-label">Ce jour</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info w-100">Modifier</button>
-        </div>
+
       </div>
     </div>
   </div>
