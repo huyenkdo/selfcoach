@@ -7,15 +7,13 @@ class Run < ApplicationRecord
 
   def total_time
     case kind
-    when "Interval" || "Tempo"
+    when "Interval"
       run_time = run_interval_time || 0
       rest_time = rest_interval_time || 0
       intervals = run_interval_nbr || 1
       (run_time * intervals) + (rest_time * (intervals - 1))
-    when "Easy" || "Long"
-      run_interval_km * run_interval_pace
     else
-      10
+      run_interval_km * run_interval_pace
     end
   end
 

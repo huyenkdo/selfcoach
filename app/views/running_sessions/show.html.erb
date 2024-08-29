@@ -5,15 +5,20 @@
 <div class="modal-body">
   <div class="d-flex flex-column justify-content-center align-items-center">
     <h2><%= localize(@running_session.date, format: :long, locale: :fr, ) %></h2>
-    <h5><%= @running_session.run.total_time %> min</h5>
+    <h5>Temps total : <%= @running_session.run.formatted_time(@running_session.run.total_time) %></h5>
 
-    <div style="background: #FFE4D0; padding: 10px 20px; margin-top: 10px;">
-      <strong>Entrainement:</strong>
-      Course de 5 min à intervalle de 2 min
-      Allure : 8km/h
+    <div style="background: #FFE4D0; padding: 10px 20px; margin-top: 10px; border-radius: 10px;">
+      <p><strong>Entrainement:</strong>
+      <% if @running_session.run.kind == "Interval" %>
+        Course de <%= @running_session.run.run_interval_time %> min à intervalle de <%= @running_session.run.rest_interval_time %> min
+      <% else %>
+        Course de <%= @running_session.run.run_interval_km %> km
+      <% end %>
+      </p>
+      <p class="m-0">Allure : <%= @running_session.run.run_interval_pace %> mins/km</p>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <%= link_to 'Modifier', edit_running_session_path(@running_session), class: 'btn btn-info w-100' %>
+  <%= link_to 'Modifier', edit_running_session_path(@running_session), class: 'rounded-pill btn btn-info w-100' %>
 </div>

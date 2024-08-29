@@ -1,10 +1,10 @@
- <div>
+ <div style="margin-bottom: 100px;">
   <div style="display: flex; justify-content: space-evenly; align-items: center;">
     <%= link_to calendar.url_for_previous_view do %>
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
 
-    <h3 style="font-size: 25px; font-weight: scroll-padding-inline-end: ;mi-bold; color: #004E89; padding-top: 24px; padding-bottom: 24px;"><%= t('date.month_names')[start_date.month] %></h3>
+    <h3 style="font-size: 25px; font-weight: scroll-padding-inline-end: ;mi-bold; color: #004E89; padding-top: 24px; padding-bottom: 24px;"><%= t('date.month_names')[start_date.month].upcase_first %></h3>
 
     <%= link_to calendar.url_for_next_view do %>
       <i class="fa-solid fa-chevron-right"></i>
@@ -13,7 +13,7 @@
 
   <% date_range.each_slice(7).each_with_index do |week, index| %>
     <div style="position: relative;">
-      <div style="color: #004E89; background: #FFE4D0; position: absolute; left: 10; top: 68px; transform: rotate(270deg); white-space: nowrap; padding: 10px; border-radius: 5px; font-weight: regular;">
+      <div style="color: #004E89;background: #fff;position: absolute;top: 75px;transform: rotate(270deg);white-space: nowrap;padding-top: 10px;padding-bottom: 10px;padding-left: 42px;padding-right: 42px;border-radius: 14px;font-weight: regular;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);left: -34px;">
         Semaine <%= index + 1 %>
       </div>
       <div class="week-container" style="margin-left: 80px; color: #004E89;">
@@ -21,12 +21,28 @@
           <table class="table table-striped">
             <tbody>
               <tr>
-                <% week.each do |day| %>
-                  <%= content_tag :td, class: calendar.td_classes_for(day) do %>
-                    <%= t('date.abbr_day_names')[day.wday] %>
-                    <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+                <div class="next-week-calendar d-flex justify-content-between">
+                  <% week.each do |day| %>
+                      <turbo-frame id="<%= day.to_s %>">
+                        <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
+                          <div class="emoji-card-day align-items-center justify-content-between">
+                            <% if RunningSession.find_by(date: day).nil? %>
+                              <h1 style="font-size: 20px">
+                                😴
+                              </h1>
+                            <% else %>
+                              <h1 style="font-size: 20px">
+                                🏃
+                              </h1>
+                            <% end %>
+                            <h4 class="p-0"><%= t('date.day_names')[day.wday].upcase_first %></h4>
+                            <h4 class="p-0"><%= day.mday %> <%= t('date.abbr_month_names')[day.mon] %> <%= day.year %></h4>
+                            <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+                          </div>
+                        </div>
+                      </turbo-frame>
                   <% end %>
-                <% end %>
+                </div>
               </tr>
             </tbody>
           </table>
