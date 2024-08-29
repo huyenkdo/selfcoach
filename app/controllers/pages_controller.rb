@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
-    start_date = Date.current.beginning_of_week(:monday)
-    end_date = Date.current.end_of_week(:sunday)
+    start_date = Date.current + 1.day
+    end_date = start_date + 6.days
 
     @user = current_user
     @program = @user.programs.last
@@ -48,9 +48,9 @@ class PagesController < ApplicationController
     end
     @km_this_week = @km_this_week.round(2)
     @formatted_total_time_this_week = @run.formatted_time(@total_time_this_week)
+
     @km_this_week = 0
     @total_time_this_week = 0
-
     @program.running_sessions.joins(:run).where(date: start_date..end_date, status: 'completed').each do |session|
       run = session.run
       @km_this_week += run.run_interval_km * run.run_interval_nbr

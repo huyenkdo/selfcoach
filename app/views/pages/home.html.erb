@@ -31,15 +31,15 @@
     </div>
     <% if @run.kind == "Interval" || @run.kind == "tempo" %>
       <div class="block-seance container-fluid d-flex align-items-center">
-        <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
+        <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance]%></p>
         <p><%= @session_details[:interval_pace] %>/min/km</p>
       </div>
     <% elsif @run.kind == "Easy" || @run.kind == "Long" %>
       <div class="block-seance container-fluid d-flex align-items-center">
         <%= image_tag("distance-font.png", alt: "Distance Icon") %>
-        <p> <%= @session_details[:distance] %> km</p>
+        <p> <%= @session_details[:distance] * 3 %> km</p>
         <%= image_tag("speed-font.png", alt: "Distance Icon") %>
-        <p><%= @session_details[:pace] %>/min/km</p>
+        <p><%= @session_details[:pace]%>/min/km</p>
       </div>
     <% end %>
   </div>
