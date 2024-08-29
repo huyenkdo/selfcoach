@@ -1,7 +1,7 @@
 <div class="content-home-page">
   <div class="welcoming-top container-fluid d-flex align-items-center justify-content-between">
     <div class="welcome-home-page">
-      <p>Welcome 👋 </p>
+      <p>Bonjour 👋 </p>
       <h1> <%= @user.first_name %> </h1>
     </div>
     <div class="param-bar-home-page d-flex align-items-center">
@@ -19,7 +19,10 @@
     <p class="run-session-date"><%= localize(@run_session.date, format: :long, locale: :fr)  %></p>
     <div class="info-item-star d-flex">
       <% @run_star.times do %>
-        <p class="star-notation">★</p>
+        <p class="star-notation"><i class="fa-solid fa-star"></i></p>
+      <% end %>
+      <% ( 5 - @run_star).times do %>
+        <p class="star-notation"><i class="fa-regular fa-star"></i></p>
       <% end %>
     </div>
   </div>
@@ -47,7 +50,7 @@
   <% (Date.current..(Date.current + 6.days)).each do |date| %>
     <turbo-frame id="<%= date.to_s %>">
       <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
-        <div class="emoji-card-day container-fluid d-flex align-items-center">
+        <div class="emoji-card-day container-fluid d-flex align-items-center justify-content-center">
           <h1>
             <% session = @next_week_sessions.find { |s| s.date == date } %>
             <% if session %>
@@ -56,7 +59,7 @@
               😴
             <% end %>
           </h1>
-          <h4> <%= localize(date, format: :custom, locale: :fr) %> </h4>
+          <h4> <%= localize(date, format: :custom, locale: :fr).capitalize %> </h4>
         </div>
         <div class="kind-time-card">
           <% if session %>
@@ -81,7 +84,7 @@
         <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
       </div>
     </div>
-    <div class="container-data-2 container-fluid d-flex justify-content-between">
+    <div class="container-data-2 container-fluid d-flex justify-content-between px-0">
       <div class="container-days-before-run">
         <h3> <%= @days_before_race %> jours </h3>
         <p> avant votre course</p>
@@ -126,7 +129,7 @@
       <% end %>
 
     <%= link_to strava_sync_path do %>
-      <button class="go-btn"><i class="fa-solid fa-person-running" style="font-size: xx-large;"></i></button>
+      <button class="go-btn"><i class="fa-solid fa-rotate" style="font-size: xx-large;"></i></button>
     <% end %>
 
     <%= link_to home_path do %>

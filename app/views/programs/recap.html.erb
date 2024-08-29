@@ -92,7 +92,10 @@
                       <!-- Placer les étoiles en dessous de la date -->
                       <div>
                         <% session.run.difficulty.times do %>
-                          <span class="text-warning">★</span>
+                          <span class="text-warning"><i class="fa-solid fa-star"></i></span>
+                        <% end %>
+                        <% ( 5 - session.run.difficulty).times do %>
+                          <span class="text-warning"><i class="fa-regular fa-star"></i></span>
                         <% end %>
                       </div>
                     </div>
