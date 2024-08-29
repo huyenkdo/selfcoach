@@ -55,6 +55,7 @@ class RunningSessionsController < ApplicationController
       redirect_to program_path(running_session.program), notice: "Séance mise à jour"
     else
       running_session.destroy!
+      redirect_to program_path(running_session.program), notice: "Séance mise à jour"
     end
   end
 
