@@ -4,7 +4,7 @@
   <div class="container-recap mt-4">
     <div class="row justify-content-center">
       <div class="col-10">
-        <h2 class="text-uppercase fw-bold" style="color: #ff5a00;">Recap</h2>
+        <h2 class="text fw-bold m-1 mb-2" style="color: #ff5a00;">Recap</h2>
       </div>
     </div>
       <div class="row justify-content-center">
@@ -37,6 +37,7 @@
         </div>
       </div>
 
+
     <!-- Mon Objectif Section -->
     <div class="row justify-content-center">
       <div class="col-10">
@@ -47,7 +48,7 @@
             <i class="fa-solid fa-pen-to-square" style="font-size:1.2rem; color: black"></i>
           </button>
         </div>
-        <div class="card shadow-sm text-center mb-3 p-3" style="border-radius: 15px;">
+        <div class="card shadow-sm text-center p-3 mb-2" style="border-radius: 15px;">
           <div class="card-body">
             <p class="card-text">
               <strong>Semi-Marathon le <%= @program.race_date.strftime("%d/%m/%Y") %></strong><br>
@@ -57,64 +58,64 @@
         </div>
       </div>
     </div>
+ </div>
 
-
-
-
-  <!-- Ma semaine type Section -->
-  <div class="container mt-3">
-    <div class="row justify-content-center">
-      <div class="col-10 text-center ">
-        <h3 class="text-dark " style="font-weight: bold;">Ma semaine type</h3>
-      </div>
+<!-- Ma semaine type Section -->
+<div class="container mt-1">
+  <div class="row justify-content-center">
+    <div class="col-10 text-left mb-2">
+      <h3 class="text-dark" style="font-weight: bold;">Ma semaine type</h3>
     </div>
+  </div>
 
-    <% @sessions.each do |session| %>
-      <div class="row justify-content-center mb-3">
-        <div class="col-10">
-          <div class="card shadow-sm">
+  <!-- Conteneur Scrollable Horizontalement -->
+  <div class="week-calendar row justify-content-center">
+    <div class="col-12">
+      <div class="d-flex flex-row overflow-auto" style="white-space: nowrap;">
+        <% @sessions.each do |session| %>
+          <!-- Chaque carte prend sa place en ligne -->
+          <div class="card shadow-sm m-2" style="min-width: 300px;">
             <div class="card-body p-3">
               <!-- Icon and Day -->
               <div class="date-icon">
-              <div class="d-flex align-items-center justify-content-center mb-4 flex-grow-1 ">
-                <!-- Icône alignée à gauche -->
-                <div class="icon text-left">
-                  <p style="font-size: 1.3rem;">🏃</p>
-                </div>
-                <!-- Date et étoiles alignées au centre -->
-                <div class="text-center">
-                  <h5 class="card-title mb-1" style="font-weight: bold;">
-                    <%= t('date.day_names')[session.date.wday]%>
-                  </h5>
-                  <!-- Placer les étoiles en dessous de la date -->
-                  <div>
-                    <% session.run.difficulty.times do %>
-                      <span class="text-warning">★</span>
-                    <% end %>
+                <div class="d-flex align-items-center justify-content-center mb-4 flex-grow-1">
+                  <!-- Icône alignée à gauche -->
+                  <div class="icon text-left">
+                    <p style="font-size: 1.3rem;">🏃</p>
+                  </div>
+                  <!-- Date et étoiles alignées au centre -->
+                  <div class="text-center">
+                    <h5 class="card-title mb-1" style="font-weight: bold;">
+                      <%= t('date.day_names')[session.date.wday] %>
+                    </h5>
+                    <!-- Placer les étoiles en dessous de la date -->
+                    <div>
+                      <% session.run.difficulty.times do %>
+                        <span class="text-warning">★</span>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
-              </div>
-
-
 
               <!-- Run details -->
               <div class="col p-3 text-dark" style="border-radius: 10px; background-color: #F7C59F;">
-                <p class="mb-1" style="font-weight: bold; background-color: #F7C59F;">Échauffement - 20 min </p>
-                <p class="mb-1"> <%= session.run.kind %>
+                <p class="mb-1" style="font-weight: bold; background-color: #F7C59F;">Échauffement - 20 min</p>
+                <p class="mb-1">
+                  <%= session.run.kind %>
                   <% if session.run.kind == "Interval" %>
-                  - <%= ((session.run.run_interval_km * session.run.run_interval_nbr) + (session.run.rest_interval_km * (session.run.run_interval_nbr - 1))).round(2) %> km
-                <% elsif session.run.kind == "Long" || session.run.kind == "Easy" || session.run.kind == "Tempo"%>
-                  - <%= (session.run.run_interval_km * session.run.run_interval_nbr).round(2) %> km
-                <% end %></p>
-                <p>
+                    - <%= ((session.run.run_interval_km * session.run.run_interval_nbr) + (session.run.rest_interval_km * (session.run.run_interval_nbr - 1))).round(2) %> km
+                  <% elsif session.run.kind == "Long" || session.run.kind == "Easy" || session.run.kind == "Tempo" %>
+                    - <%= (session.run.run_interval_km * session.run.run_interval_nbr).round(2) %> km
+                  <% end %>
                 </p>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+  </div>
 
     <!-- Total time and session count -->
     <div class="row justify-content-center mt-3">
@@ -135,13 +136,13 @@
     </div>
 
     <!-- Button -->
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center mt-3 mb-3">
       <div class="col-10 text-center">
         <%= link_to 'Let\'s Run', home_path, class: 'btn btn-info', style: 'border-radius: 25px; padding: 10px 40px; font-size: 1.2rem;' %>
       </div>
     </div>
   </div>
-  </div>
+</div>
 </div>
 
 

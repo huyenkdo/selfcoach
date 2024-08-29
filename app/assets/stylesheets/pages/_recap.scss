@@ -44,3 +44,12 @@ body {
 .modal-recap{
   border-radius: 20px;
 }
+
+.week-calendar {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+ margin-left: 12px;
+}
