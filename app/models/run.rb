@@ -28,7 +28,7 @@ class Run < ApplicationRecord
   end
 
   def warmup_pace
-    (run_interval_pace * 1.5).round(2)
+    (run_interval_pace * 1.10).round(2)
   end
 
   def session_details

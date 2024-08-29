@@ -15,17 +15,17 @@
     <% end %>
   </div>
    <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
-  <%= link_to program_path(@program) do %>
-      <button class="calendar-btn"></button>
+    <%= link_to program_path(@program) do %>
+      <button class="calendar-btn active"></button>
     <% end %>
 
-  <%= link_to strava_sync_path do %>
-    <button class="go-btn"><i class="fa-solid fa-person-running" style="font-size: xx-large;"></i></button>
-  <% end %>
+    <%= link_to strava_sync_path do %>
+      <button class="go-btn"><i class="fa-solid fa-person-running" style="font-size: xx-large;"></i></button>
+    <% end %>
 
-  <%= link_to home_path do %>
-    <button class="profil-btn"></button>
-  <% end %>
+    <%= link_to home_path do %>
+      <button class="profil-btn"></button>
+    <% end %>
   </div>
 
 

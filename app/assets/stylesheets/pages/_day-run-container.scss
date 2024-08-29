@@ -11,14 +11,15 @@
   background: none;
   color: white;
   margin-top: 10px;
-  padding-right: 25px;
+  padding-right: 0px;
   padding-top: 10px;
   height: 30px;
   border-radius: 11px;
   display: flex;
   justify-content: start;
   padding-left: 12px;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .info-item-note {
@@ -40,7 +41,7 @@
 
 .info-item-star p {
   margin: -15px;
-  font-size: 14px;
+  font-size: 17px;
   color: #FF6B35;
 }
 
