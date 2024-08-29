@@ -48,10 +48,20 @@ class PagesController < ApplicationController
     end
     @km_this_week = @km_this_week.round(2)
     @formatted_total_time_this_week = @run.formatted_time(@total_time_this_week)
+    @km_this_week = 0
+    @total_time_this_week = 0
 
-    @real_total_km_ran = @run.real_total_km_ran
-    @real_total_time_ran = @run.real_total_time_ran
-    @real_avg_pace_ran = @run.real_avg_pace_ran
+    @program.running_sessions.joins(:run).where(date: start_date..end_date, status: 'completed').each do |session|
+      run = session.run
+      @km_this_week += run.run_interval_km * run.run_interval_nbr
+      @total_time_this_week += run.total_time
+    end
+    @km_this_week = @km_this_week.round(2)
+    @formatted_total_time_this_week = @run.formatted_time(@total_time_this_week)
+
+    # @real_total_km_ran = @run.real_total_km_ran
+    # @real_total_time_ran = @run.real_total_time_ran
+    # @real_avg_pace_ran = @run.real_avg_pace_ran
   end
 
   def recap

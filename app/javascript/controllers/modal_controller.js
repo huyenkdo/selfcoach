@@ -21,7 +21,7 @@ export default class extends Controller {
     const response = await fetch(url)
     const html = await response.text();
 
-    const modalBody = this.modalElementTarget.querySelector(".modal-body");
+    const modalBody = this.modalElementTarget.querySelector(".modal-content");
     modalBody.innerHTML = html
   }
 }
