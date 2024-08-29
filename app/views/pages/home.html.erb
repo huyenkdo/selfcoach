@@ -32,14 +32,16 @@
       <p> <%= @warmup_time %> min </p>
       <p> <%= @run.warmup_pace %>/min/km</p>
     </div>
-    <% if @run.kind == "Interval" %>
+    <% if @run.kind == "Interval" || @run.kind == "tempo" %>
       <div class="block-seance container-fluid d-flex align-items-center">
         <p class="me-4"><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
         <p><%= @session_details[:interval_pace] %>/min/km</p>
       </div>
     <% elsif @run.kind == "Easy" || @run.kind == "Long" %>
       <div class="block-seance container-fluid d-flex align-items-center">
-        <p class="me-4"><%= @session_details[:distance] %> km</p>
+        <%= image_tag("distance-font.png", alt: "Distance Icon") %>
+        <p class="me-4"> <%= @session_details[:distance] %> km</p>
+        <%= image_tag("speed-font.png", alt: "Distance Icon") %>
         <p><%= @session_details[:pace] %>/min/km</p>
       </div>
     <% end %>
@@ -107,7 +109,7 @@
         </div>
         <div class="d-flex align-items-center">
           <div class="time-data-3 mr-3">
-            <p class="duration-data-3 mb-0">Durée</p>
+            <p class="duration-data-3 mb-0"> Durée</p>
             <p class="time-duration-data-3"><%= @latest_run.nil? ? 0 : @latest_run.formatted_time(@real_total_time_ran) %></p>
           </div>
           <div>
