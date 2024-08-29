@@ -1,7 +1,7 @@
 <div class="content-home-page">
   <div class="welcoming-top container-fluid d-flex align-items-center justify-content-between">
     <div class="welcome-home-page">
-      <p>Welcome 👋 </p>
+      <p>Bonjour 👋 </p>
       <h1> <%= @user.first_name %> </h1>
     </div>
     <div class="param-bar-home-page d-flex align-items-center">
@@ -19,25 +19,28 @@
     <p class="run-session-date"><%= localize(@run_session.date, format: :long, locale: :fr)  %></p>
     <div class="info-item-star d-flex">
       <% @run_star.times do %>
-        <p class="star-notation">★</p>
+        <p class="star-notation"><i class="fa-solid fa-star"></i></p>
+      <% end %>
+      <% ( 5 - @run_star).times do %>
+        <p class="star-notation"><i class="fa-regular fa-star"></i></p>
       <% end %>
     </div>
   </div>
   <div class="info-item">
-    <div class="block-seance container-fluid d-flex align-items-center">
+    <div class="block-seance container-fluid d-flex align-items-center justify-content-between">
       <p>Echauffement </p>
       <p> <%= @warmup_time %> min </p>
       <p> <%= @run.warmup_pace %>/min/km</p>
     </div>
     <% if @run.kind == "Interval" || @run.kind == "tempo" %>
       <div class="block-seance container-fluid d-flex align-items-center">
-        <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance]%></p>
+        <p class="me-4"><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
         <p><%= @session_details[:interval_pace] %>/min/km</p>
       </div>
     <% elsif @run.kind == "Easy" || @run.kind == "Long" %>
       <div class="block-seance container-fluid d-flex align-items-center">
         <%= image_tag("distance-font.png", alt: "Distance Icon") %>
-        <p> <%= @session_details[:distance] * 3 %> km</p>
+        <p class="me-4"> <%= @session_details[:distance] %> km</p>
         <%= image_tag("speed-font.png", alt: "Distance Icon") %>
         <p><%= @session_details[:pace]%>/min/km</p>
       </div>
@@ -49,7 +52,7 @@
   <% (Date.current..(Date.current + 6.days)).each do |date| %>
     <turbo-frame id="<%= date.to_s %>">
       <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
-        <div class="emoji-card-day container-fluid d-flex align-items-center">
+        <div class="emoji-card-day container-fluid d-flex align-items-center justify-content-center">
           <h1>
             <% session = @next_week_sessions.find { |s| s.date == date } %>
             <% if session %>
@@ -58,7 +61,7 @@
               😴
             <% end %>
           </h1>
-          <h4> <%= localize(date, format: :custom, locale: :fr) %> </h4>
+          <h4> <%= localize(date, format: :custom, locale: :fr).capitalize %> </h4>
         </div>
         <div class="kind-time-card">
           <% if session %>
@@ -83,7 +86,7 @@
         <div class="progress-bar custom-progress-bar" style="width: <%= @completion_percentage %>%"><%= @completion_percentage %>%</div>
       </div>
     </div>
-    <div class="container-data-2 container-fluid d-flex justify-content-between">
+    <div class="container-data-2 container-fluid d-flex justify-content-between px-0">
       <div class="container-days-before-run">
         <h3> <%= @days_before_race %> jours </h3>
         <p> avant votre course</p>
@@ -101,17 +104,17 @@
       <h1>Dernière course</h1>
       <div class="container-data-3-infos container-fluid d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-          <p class="duration-data-4"> 0 </p>
+          <p class="duration-data-4"> <%= @latest_run_km %> </p>
           <p class="time-duration-data-4"> km </p>
         </div>
         <div class="d-flex align-items-center">
           <div class="time-data-3 mr-3">
             <p class="duration-data-3 mb-0"> Durée</p>
-            <p class="time-duration-data-3"><%= @run.formatted_time(@real_total_time_ran) %></p>
+            <p class="time-duration-data-3"><%= @latest_run.nil? ? 0 : @latest_run.formatted_time(@real_total_time_ran) %></p>
           </div>
           <div>
             <p class="duration-data-3 mb-0">Pace</p>
-            <p class="time-duration-data-3"> 0 min / Km </p>
+            <p class="time-duration-data-3"> <%= @real_avg_pace_ran %> min / Km </p>
           </div>
         </div>
       </div>
@@ -128,7 +131,7 @@
       <% end %>
 
     <%= link_to strava_sync_path do %>
-      <button class="go-btn"><i class="fa-solid fa-person-running" style="font-size: xx-large;"></i></button>
+      <button class="go-btn"><i class="fa-solid fa-rotate" style="font-size: xx-large;"></i></button>
     <% end %>
 
     <%= link_to home_path do %>

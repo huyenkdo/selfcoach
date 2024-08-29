@@ -3,23 +3,24 @@
   <h1 class="fw-bold text-primary pt-4" style="font-size: xx-large">Paramètres</h1>
   <div class="d-flex justify-content-center">
     <div class="mb-2 text-info text-center mt-4">
-      <h2 class="fw-bold"><%= t('date.day_names')[@date.wday].upcase_first %></h2>
-      <h2 class="fw-bold border-bottom border-dark-subtle pb-4"><%= @date.to_fs(:rfc822) %></h2>
+      <h2 class="fw-bold border-bottom border-dark-subtle pb-4"><%= t('date.day_names')[@date.wday].upcase_first %> <%= @date.to_fs(:rfc822) %></h2>
     </div>
   </div>
 
-  <%= simple_form_for(@running_session, method: 'patch', html: { data: { controller: "running-session-edit-form", running_session_edit_form_pace_value: @run_interval_pace, running_session_edit_form_km_value: @run_interval_km, running_session_edit_form_time_value: @run_interval_time }, id:"form-running-session-edit" }) do |f| %>
+  <%= simple_form_for(@running_session, url:"/programs/#{@program.id}/running_sessions/#{@running_session.id}", method: 'patch', html: { data: { controller: "running-session-edit-form", running_session_edit_form_pace_value: @run_interval_pace, running_session_edit_form_km_value: @run_interval_km, running_session_edit_form_time_value: @run_interval_time }, id:"form-running-session-edit" }) do |f| %>
     <div class="row justify-content-around text-info mt-3">
       <p class="col-9 fs-5">Dispo pour s'entrainer ?</p>
       <div class="checkbox-wrapper-5 col-3">
         <%= f.input :free_or_not, as: :boolean, label: false, input_html: { class:'check-5', checked: true, data: { action: "change->running-session-edit-form#freeOrNotChanged", running_session_edit_form_target: "freeOrNot"} }, wrapper_html: { class: 'check m-0' } %>
       </div>
     </div>
-    <p class="fs-5 text-info mb-2">Type de course ?</p>
-    <%= f.input :kind, as: :select, collection: ['Easy', 'Long', 'Interval', 'Tempo'], label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { action: "change->running-session-edit-form#kindChanged", running_session_edit_form_target: "kind" } }, wrapper_html: { class: 'flex-grow-1' }, selected: @kind %>
+    <div class="d-flex align-items-baseline" data-running-session-edit-form-target="kind">
+      <p class="col-7 fs-5 text-info mb-2">Type de course ?</p>
+      <%= f.input :kind, as: :select, collection: ['Easy', 'Long', 'Interval', 'Tempo'], label: false, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { action: "change->running-session-edit-form#kindChanged", running_session_edit_form_target: 'kindInput' } }, wrapper_html: { class: 'flex-grow-1' }, selected: @kind %>
+    </div>
     <div data-running-session-edit-form-target="intervalFields">
-      <div class="d-flex mb-2 align-items-baseline">
-        <p class="col-8 fs-5 text-info mb-2">Distance de course :</p>
+      <div class="d-flex align-items-baseline">
+        <p class="col-8 fs-5 text-info">Distance de course :</p>
         <%= f.input :run_interval_km, label: false, placeholder: @run_interval_km.to_s, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { action: "input->running-session-edit-form#updateRunIntervalTime", running_session_edit_form_target: "runIntervalKm" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
         <p class="fs-5 text-dark mb-2 ms-3 align-content-center col-1">km</p>
       </div>
@@ -29,16 +30,28 @@
         <p class="fs-5 text-dark mb-2 ms-3 align-content-center">mins</p>
       </div>
       <% if @kind == "Interval" %>
-        <div class="d-flex align-items-baseline">
-          <p class="col-8 fs-5 text-info mb-2 me-4">Distance de repos :</p>
-          <%= f.input :rest_interval_time, label: false, placeholder: @rest_interval_km, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "restIntervalTime" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
-          <p class="fs-5 text-dark mb-2 ms-3 align-content-center col-1">km</p>
+        <div class="d-flex align-items-baseline" data-running-session-edit-form-target="restIntervalTime">
+          <p class="fs-5 text-info mb-2 me-4">Temps de repos :</p>
+          <%= f.input :rest_interval_time, label: false, placeholder: @rest_interval_time, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "restIntervalTimeInput" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
+          <p class="fs-5 text-dark mb-2 ms-3 align-content-center">mins</p>
         </div>
-        <%= f.input :run_interval_nbr, label: false, placeholder: @run_interval_nbr, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "runIntervalNbr" } }, wrapper_html: { class: 'flex-grow-1' } %>
+        <div class="d-flex align-items-baseline" data-running-session-edit-form-target="runIntervalNbr">
+          <p class="fs-5 text-info mb-2 me-4 col-6">Nb d'intervalles :</p>
+          <%= f.input :run_interval_nbr, label: false, placeholder: @run_interval_nbr, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "runIntervalNbrInput", action: "input->running-session-edit-form#updateTotalTime" } }, wrapper_html: { class: 'flex-grow-1' } %>
+        </div>
       <% else %>
-        <%= f.input :rest_interval_time, label: false, placeholder: @rest_interval_km, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "restIntervalTime" } }, wrapper_html: { class: 'flex-grow-1 d-none' } %>
-        <%= f.input :run_interval_nbr, label: false, placeholder: @run_interval_nbr, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "runIntervalNbr" } }, wrapper_html: { class: 'flex-grow-1 d-none' } %>
+        <div class="d-flex align-items-baseline d-none" data-running-session-edit-form-target="restIntervalTime">
+          <p class="fs-5 text-info mb-2 me-4">Temps de repos :</p>
+          <%= f.input :rest_interval_time, label: false, placeholder: @rest_interval_time, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "restIntervalTimeInput" } }, wrapper_html: { class: 'flex-grow-1 col-2' } %>
+          <p class="fs-5 text-dark mb-2 ms-3 align-content-center">mins</p>
+        </div>
+        <div class="d-flex align-items-baseline d-none" data-running-session-edit-form-target="runIntervalNbr">
+          <p class="fs-5 text-info mb-2 me-4 col-6">Nb d'intervalles :</p>
+          <%= f.input :run_interval_nbr, label: false, placeholder: @run_interval_nbr, input_html: { style: "border-radius: 5px; background: #1a659e85;", class: "fst-italic text-white", data: { running_session_edit_form_target: "runIntervalNbrInput", action: "input->running-session-edit-form#updateTotalTime" } }, wrapper_html: { class: 'flex-grow-1' } %>
+        </div>
       <% end %>
+      </div>
+      <p class="text-info fst-italic" data-running-session-edit-form-target="totalRunTime" >Durée totale : <%= @run.formatted_time(@total_time) %></p>
       <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
         <%= link_to program_path(@program) do %>
             <button class="calendar-btn"></button>
@@ -49,7 +62,6 @@
         <%= link_to home_path do %>
           <button class="profil-btn"></button>
         <% end %>
-        </div>
       </div>
   <% end %>
 </div>

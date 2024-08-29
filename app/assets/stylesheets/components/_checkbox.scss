@@ -1,16 +1,17 @@
 .checkbox-wrapper-13 {
   position: relative;
   z-index: 1;
-  background-color: #EFEFD0;
+  background-color: #1a659e85;
+  color: #061e41;
 }
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   .checkbox-wrapper-13 input[type=checkbox] {
-    --active: #FF6B35;
+    --active: #014e89;
     --active-inner: #fff;
-    --focus: 2px rgb(247 156 88 / 30%);
-    --border: #f8a464;
-    --border-hover: #f8a464;
+    --focus: 2px rgb(56 139 196 / 40%);
+    --border: #004e89;
+    --border-hover: #3886c1;
     --background: #fff;
     --disabled: #F6F8FF;
     --disabled-inner: #E1E6F9;

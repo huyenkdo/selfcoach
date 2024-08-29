@@ -1,7 +1,16 @@
+.container-recap .card, .container .card {
+  max-width: 100%;
+  width: 100%;  /* S'assure que toutes les cartes utilisent 100% de la largeur disponible */
+  box-sizing: border-box;
+  // border-radius: 30px;
+}
+
 .container-recap{
+  font-size: larger;
   // margin: 15px;
-  padding: 20px;
+  padding: 10px;
   padding-bottom: 15px;
+  // border-radius: 30px;
 }
 
 body {
@@ -13,12 +22,15 @@ body {
   background-attachment: fixed;
   overflow: auto;
   min-height: 100vh;
-  padding: 15px;
+  // padding: 10px;
 }
 .card {
   // margin-bottom: 15px; /* Ajuste la marge entre les cartes */
-  padding: 15px; /* Ajoute un padding autour du contenu */
-  border-radius: 10px; /* Ajoute des coins arrondis */
+  padding: 10px; /* Ajoute un padding autour du contenu */
+  border-radius: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  // margin: 15px;
 }
 
 .card-body {
@@ -28,10 +40,19 @@ body {
   margin-right: 20px;
 }
 
-.date-icon .icon {
+.date-icon p {
   margin-right: 10px;
 }
 
 .modal-recap{
   border-radius: 20px;
+}
+
+.week-calendar {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+ margin-left: 12px;
 }

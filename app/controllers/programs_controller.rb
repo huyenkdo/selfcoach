@@ -6,7 +6,7 @@ class ProgramsController < ApplicationController
 
   def show
     @running_sessions = @program.running_sessions
-    @start_date = params[:start_date] || @program.running_sessions.first.date.beginning_of_week
+    @start_date = params[:start_date] || @program.running_sessions.min_by { :date }.date.beginning_of_week
   end
 
   def new
@@ -76,7 +76,7 @@ class ProgramsController < ApplicationController
     tempo_run_recurrences = interval_or_tempo_run_recurrences - interval_run_recurrences
 
     if program.save
-      @user.vma = (52 - (0.35 * @user.age)) / 3.5 if @user.vma.blank?
+      @user.vma = ((52 - (0.35 * @user.age)) / 3.5).ceil if @user.vma.blank?
 
       easy_pace = (60 / (@user.vma * 0.65)).round(2)
       tempo_pace = (60 / (@user.vma * 0.85)).round(2)
@@ -98,7 +98,7 @@ class ProgramsController < ApplicationController
         easy_run = Run.create!(
           kind: 'Easy',
           run_interval_km: distance = rand(2..5),
-          run_interval_time: (distance * easy_pace).round(2),
+          run_interval_time: (distance * easy_pace).round(1),
           run_interval_pace: easy_pace,
           run_interval_nbr: 1,
           difficulty: 1,
@@ -112,11 +112,11 @@ class ProgramsController < ApplicationController
       end
 
       long_run_recurrences.each_with_index do |recurrence, i|
-        long_run_distance = base_long_run_distance + (i * increment_distance)
+        long_run_distance = (base_long_run_distance + (i * increment_distance)).round(1)
         long_run = Run.create!(
           kind: 'Long',
           run_interval_km: long_run_distance,
-          run_interval_time: (long_run_distance * easy_pace).round(2),
+          run_interval_time: (long_run_distance * easy_pace).round(1),
           run_interval_pace: easy_pace,
           run_interval_nbr: 1,
           difficulty:
@@ -138,10 +138,10 @@ class ProgramsController < ApplicationController
         interval_run = Run.create!(
           kind: 'Interval',
           run_interval_time: run_time = rand(1..3),
-          run_interval_km: (run_time / interval_pace).round(2),
+          run_interval_km: (run_time / interval_pace).round(1),
           run_interval_pace: interval_pace,
           rest_interval_time: rest_time = 1,
-          rest_interval_km: (rest_time / interval_pace).round(2),
+          rest_interval_km: (rest_time / interval_pace).round(1),
           rest_interval_pace: easy_pace,
           run_interval_nbr: rand(7..10),
           difficulty: 5,
@@ -159,7 +159,7 @@ class ProgramsController < ApplicationController
         tempo_run = Run.create!(
           kind: 'Tempo',
           run_interval_km: tempo_run_distance,
-          run_interval_time: (tempo_run_distance * tempo_pace).round(2),
+          run_interval_time: (tempo_run_distance * tempo_pace).round(1),
           run_interval_pace: tempo_pace,
           run_interval_nbr: 1,
           difficulty: 4,
@@ -206,6 +206,9 @@ class ProgramsController < ApplicationController
         @km_this_week += (session.run.run_interval_km * session.run.run_interval_nbr)
     end
     @km_this_week = @km_this_week.round(2)
+   total_minutes = @program.objective_time
+   @hours = (total_minutes / 60).round(0)
+   @minutes = (total_minutes % 60).round(0)
   end
 
   private
