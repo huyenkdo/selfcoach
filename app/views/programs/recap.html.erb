@@ -1,7 +1,7 @@
 <!-- Mon Profil Section -->
 <div class="start-background">
 
-  <div class="container-recap mt-4">
+  <div class="container-recap mt-2">
     <div class="row justify-content-center">
       <div class="col-10">
         <h2 class="text fw-bold m-1 mb-2" style="color: #ff5a00;">Recap</h2>
@@ -14,7 +14,7 @@
             <div class="card-body">
            <div class="d-flex justify-content-between">
               <h5 class="card-title text-center">Mon profil</h5>
-            <button class="btn btn-outline-secondary btn-sm float-end mb-4" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="border: none;">
+            <button class="btn btn-outline-secondary btn-sm float-end mb-2" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="border: none;">
               <i class="fa-solid fa-gear" style="font-size:1.2rem; color:white;"></i>
             </button>
          </div>
@@ -51,7 +51,7 @@
         <div class="card shadow-sm text-center p-3 mb-2" style="border-radius: 30px;">
           <div class="card-body">
             <p class="card-text">
-              <strong>Semi-Marathon: <%= @program.race_date.strftime("%d/%m/%Y") %></strong><br>
+              <strong>Semi-Marathon : <%= @program.race_date.strftime("%d/%m/%Y") %></strong><br>
              <strong><%= @hours %>h <%= @minutes %>min</strong>
             </p>
           </div>
@@ -128,8 +128,8 @@
               <p class="mb-0"><%= @km_this_week%> km </p>
             </div>
             <div>
-              <p class="mb-0"><strong>Nombre de séances: </strong></p>
-              <p class="mb-0"><%= @sessions.count %></p>
+              <p class="mb-0"><strong>Nbre de séances: </strong></p>
+              <p class="mb-0"><%= @sessions.count %> séances</p>
             </div>
           </div>
         </div>
