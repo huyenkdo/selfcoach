@@ -1,4 +1,4 @@
-<div class="content-home-page">
+<div class="content-home-page" style="margin-bottom: 85px">
   <div class="welcoming-top container-fluid d-flex align-items-center justify-content-between">
     <div class="welcome-home-page">
       <p>Bonjour 👋 </p>
@@ -107,14 +107,14 @@
           <p class="duration-data-4"> <%= @latest_run_km %> </p>
           <p class="time-duration-data-4"> km </p>
         </div>
-        <div class="d-flex align-items-center">
-          <div class="time-data-3 mr-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="time-data-3 me-3">
             <p class="duration-data-3 mb-0"> Durée</p>
             <p class="time-duration-data-3"><%= @latest_run.nil? ? 0 : @latest_run.formatted_time(@real_total_time_ran) %></p>
           </div>
           <div>
             <p class="duration-data-3 mb-0">Pace</p>
-            <p class="time-duration-data-3"> <%= @real_avg_pace_ran %> min / Km </p>
+            <p class="time-duration-data-3"> <%= @real_avg_pace_ran %> min/Km </p>
           </div>
         </div>
       </div>
