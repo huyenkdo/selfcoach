@@ -60,7 +60,7 @@ class StravaController < ApplicationController
       running_session = RunningSession.find_by(date: activity_date)
       unless running_session.nil?
         run = running_session.run
-        running_session.udpdate!(
+        running_session.update!(
           status: "completed"
         )
         run.update!(
