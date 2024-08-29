@@ -16,6 +16,10 @@
 
 <div class="day-run-container">
   <div class="info-item container-fluid d-flex align-items-center justify-content-between">
+    <% if @run_session.status == 'completed' %>
+    <p class="align-content-center border border-dark-subtle fw-bold position-absolute shadow-lg text-center text-info"
+    style="background: #d9edfbd6; top: 205px; left: 35px; width: 359px; height: 75px; border-radius: 20px; font-size: 27px;">Séance réalisée 🎉</p>
+    <% end %>
     <p class="run-session-date"><%= localize(@run_session.date, format: :long, locale: :fr)  %></p>
     <div class="info-item-star d-flex">
       <% @run_star.times do %>
@@ -32,12 +36,12 @@
       <p> <%= @warmup_time %> min </p>
       <p> <%= @run.warmup_pace %>/min/km</p>
     </div>
-    <% if @run.kind == "Interval" || @run.kind == "tempo" %>
+    <% if @run.kind == "Interval"%>
       <div class="block-seance container-fluid d-flex align-items-center">
         <p class="me-4"><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
         <p><%= @session_details[:interval_pace] %>/min/km</p>
       </div>
-    <% elsif @run.kind == "Easy" || @run.kind == "Long" %>
+    <% else %>
       <div class="block-seance container-fluid d-flex align-items-center">
         <%= image_tag("distance-font.png", alt: "Distance Icon") %>
         <p class="me-4"> <%= @session_details[:distance] %> km</p>

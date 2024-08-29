@@ -26,7 +26,7 @@
                       <turbo-frame id="<%= day.to_s %>">
                         <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
                           <div class="emoji-card-day align-items-center justify-content-between">
-                            <% if RunningSession.find_by(date: day).nil? %>
+                            <% if @running_sessions.select { |s| s.date == day }.first.nil? %>
                               <h1 style="font-size: 20px">
                                 😴
                               </h1>
