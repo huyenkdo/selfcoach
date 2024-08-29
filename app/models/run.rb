@@ -20,10 +20,10 @@ class Run < ApplicationRecord
   end
 
   def warmup_time
-    if kind == "interval run"
+    if kind == "interval"
       20
     else
-      0
+      5
     end
   end
 
