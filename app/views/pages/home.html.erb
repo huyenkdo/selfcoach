@@ -16,7 +16,7 @@
 
 <div class="day-run-container">
   <div class="info-item container-fluid d-flex align-items-center justify-content-between">
-    <p class="run-session-date"><%= @run_session.date.strftime("%A %d %B") %></p>
+    <p class="run-session-date"><%= localize(@run_session.date, format: :long, locale: :fr)  %></p>
     <div class="info-item-star d-flex">
       <% @run_star.times do %>
         <p class="star-notation">★</p>
@@ -47,7 +47,7 @@
   <% (Date.current..(Date.current + 6.days)).each do |date| %>
     <turbo-frame id="<%= date.to_s %>">
       <div class="next-week-card" data-bs-toggle="modal" data-bs-target="#sessionModal" data-turbo-frame="session_details" data-turbo-action="advance">
-        <div class="emoji-card-day container-fluid d-flex align-items-center justify-content-between">
+        <div class="emoji-card-day container-fluid d-flex align-items-center">
           <h1>
             <% session = @next_week_sessions.find { |s| s.date == date } %>
             <% if session %>
@@ -56,7 +56,7 @@
               😴
             <% end %>
           </h1>
-          <h4> <%= date.strftime("%A %d") %> </h4>
+          <h4> <%= localize(date, format: :custom, locale: :fr) %> </h4>
         </div>
         <div class="kind-time-card">
           <% if session %>
@@ -120,17 +120,18 @@
   </div>
 
   <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
-  <%= link_to program_path(@program) do %>
-      <button class="calendar-btn"></button>
+    <%= link_to program_path(@program) do %>
+
+        <button class="calendar-btn <%= 'active' if current_page?(program_path(@program)) %>"></button>
+      <% end %>
+
+    <%= link_to strava_sync_path do %>
+      <button class="go-btn"><i class="fa-solid fa-person-running" style="font-size: xx-large;"></i></button>
     <% end %>
 
-  <%= link_to strava_sync_path do %>
-    <button class="go-btn"><i class="fa-solid fa-person-running" style="font-size: xx-large;"></i></button>
-  <% end %>
-
-  <%= link_to home_path do %>
-    <button class="profil-btn"></button>
-  <% end %>
+    <%= link_to home_path do %>
+      <button class="profil-btn <%= 'active' if current_page?(home_path) %>"></button>
+    <% end %>
   </div>
 
 <!-- Modal -->
