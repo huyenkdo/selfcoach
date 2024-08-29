@@ -6,7 +6,7 @@ class ProgramsController < ApplicationController
 
   def show
     @running_sessions = @program.running_sessions
-    @start_date = params[:start_date] || @program.running_sessions.first.date.beginning_of_week
+    @start_date = params[:start_date] || @program.running_sessions.min_by { :date }.date.beginning_of_week
   end
 
   def new

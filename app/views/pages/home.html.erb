@@ -34,12 +34,12 @@
     </div>
     <% if @run.kind == "Interval" %>
       <div class="block-seance container-fluid d-flex align-items-center">
-        <p><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
+        <p class="me-4"><%= @session_details[:intervals] %> x <%= @session_details[:interval_distance] %></p>
         <p><%= @session_details[:interval_pace] %>/min/km</p>
       </div>
     <% elsif @run.kind == "Easy" || @run.kind == "Long" %>
       <div class="block-seance container-fluid d-flex align-items-center">
-        <p><%= @session_details[:distance] %> km</p>
+        <p class="me-4"><%= @session_details[:distance] %> km</p>
         <p><%= @session_details[:pace] %>/min/km</p>
       </div>
     <% end %>
@@ -102,17 +102,17 @@
       <h1>Dernière course</h1>
       <div class="container-data-3-infos container-fluid d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-          <p class="duration-data-4"> 0 </p>
+          <p class="duration-data-4"> <%= @latest_run_km %> </p>
           <p class="time-duration-data-4"> km </p>
         </div>
         <div class="d-flex align-items-center">
           <div class="time-data-3 mr-3">
             <p class="duration-data-3 mb-0">Durée</p>
-            <p class="time-duration-data-3"><%= @run.formatted_time(@real_total_time_ran) %></p>
+            <p class="time-duration-data-3"><%= @latest_run.nil? ? 0 : @latest_run.formatted_time(@real_total_time_ran) %></p>
           </div>
           <div>
             <p class="duration-data-3 mb-0">Pace</p>
-            <p class="time-duration-data-3"> 0 min / Km </p>
+            <p class="time-duration-data-3"> <%= @real_avg_pace_ran %> min / Km </p>
           </div>
         </div>
       </div>
