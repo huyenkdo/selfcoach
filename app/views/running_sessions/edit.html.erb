@@ -51,7 +51,7 @@
         </div>
       <% end %>
       </div>
-      <p class="text-info fst-italic" data-running-session-edit-form-target="totalRunTime" >Durée totale : <%= @total_time %> mins</p>
+      <p class="text-info fst-italic" data-running-session-edit-form-target="totalRunTime" >Durée totale : <%= @run.formatted_time(@total_time) %></p>
       <div class="nav-bar-home-page container-fluid d-flex align-items-center justify-content-between">
         <%= link_to program_path(@program) do %>
             <button class="calendar-btn"></button>
