@@ -40,7 +40,7 @@ class StravaController < ApplicationController
     redirect_to profile_path, notice: 'Ton compte Strava a bien été connecté!'
   rescue StandardError => e
     # Handle any errors during the OAuth process
-    redirect_to root_path, alert: "Erreur: #{e.message}"
+    redirect_to strava_connect_path, alert: "Erreur: #{e.message}"
   end
 
   def sync
